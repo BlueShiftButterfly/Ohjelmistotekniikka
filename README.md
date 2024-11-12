@@ -1,5 +1,11 @@
 # Ohjelmistotekniikka, harjoitustyö
 
-**Harjoitustyöksi** olen tekemässä tower defence-pelin (*Väliaikainen aihe, varmaan muuttuu, en ole vielä päättänyt lopullista aihetta*). 
+## Harjoitustyö
+
+Valitsin harjoitustyön aiheeksi laivanupotuspelin.
+
+[Alustava määrittelydokumentti](https://github.com/BlueShiftButterfly/Ohjelmistotekniikka/tree/main/dokumentaatio/vaatimusmaarittely)
+
+## Linkki viikottaisiin laskareihin
 
 [Laskarit](https://github.com/BlueShiftButterfly/Ohjelmistotekniikka/tree/main/laskarit)
