@@ -1,6 +1,6 @@
 # Ohjelmistotekniikka, harjoitustyö
 
-## Harjoitustyö
+## Laivanupotuspeli
 
 Valitsin harjoitustyön aiheeksi laivanupotuspelin.
 
