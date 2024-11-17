@@ -4,7 +4,7 @@
 
 Valitsin harjoitustyön aiheeksi laivanupotuspelin.
 
-[Alustava määrittelydokumentti](https://github.com/BlueShiftButterfly/Ohjelmistotekniikka/blob/main/dokumentaatio/vaatimusmaarittely.md)
+[Alustava määrittelydokumentti](https://github.com/BlueShiftButterfly/Ohjelmistotekniikka/blob/main/laivanupotuspeli/dokumentaatio/vaatimusmaarittely.md)
 
 ## Linkki viikottaisiin laskareihin
 
