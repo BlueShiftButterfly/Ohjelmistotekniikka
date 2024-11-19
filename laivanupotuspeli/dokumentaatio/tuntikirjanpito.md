@@ -4,5 +4,5 @@
 | :----:|:-----| :-----|
 | 12.11 | 1 | Luoto projektin alustava dokumentaatio |
 | 14.11. | 1 | Projektin ja komponenttien luonti. Myös arkkitehtuurin suunnittelua. |
-| 19.11. | | Sovelluksen toiminnallisuuden koodausta sekä testausta. Myös dokementaation kirjoittamista. |
-| yht   | 1   | | 
+| 19.11. | 5 | Sovelluksen toiminnallisuuden koodausta sekä testausta. Myös dokementaation kirjoittamista. |
+| yht   | 7   | | 
