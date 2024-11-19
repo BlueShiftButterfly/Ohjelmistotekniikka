@@ -3,10 +3,15 @@ from engine.abstract_display import AbstractDisplay
 
 class Display(AbstractDisplay):
     def __init__(self, screen_width: int, screen_height: int):
-        self.__surface: pygame.Surface = self.set_resolution(screen_width, screen_height)
+        self.__surface: pygame.Surface = pygame.display.set_mode(screen_width, screen_height)
 
-    def set_resolution(self, screen_width: int, screen_height: int):
-        self.__surface = pygame.display.set_mode((screen_width, screen_height))
+    @property
+    def resolution(self) -> tuple:
+        return (self.__surface.get_width(), self.__surface.get_height())
+
+    @resolution.setter
+    def resolution(self, res: tuple[int, int]):
+        self.__surface = pygame.display.set_mode((res[0], res[1]))
 
     @property
     def surface(self):
