@@ -3,7 +3,7 @@ from engine.abstract_display import AbstractDisplay
 
 class Display(AbstractDisplay):
     def __init__(self, screen_width: int, screen_height: int):
-        self.__surface: pygame.Surface = pygame.display.set_mode(screen_width, screen_height)
+        self.__surface: pygame.Surface = pygame.display.set_mode((screen_width, screen_height))
 
     @property
     def resolution(self) -> tuple:

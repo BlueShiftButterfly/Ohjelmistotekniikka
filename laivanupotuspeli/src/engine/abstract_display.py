@@ -1,9 +1,14 @@
 from abc import ABCMeta, abstractmethod
 
 class AbstractDisplay(metaclass=ABCMeta):
+    @property
     @abstractmethod
-    def set_resolution(self):
-        raise NotImplementedError("set_resolution method must be defined to use the base class")
+    def resolution(self) -> tuple:
+        raise NotImplementedError("resolution method must be defined to use the base class")
+
+    @resolution.setter
+    def resolution(self, res: tuple[int, int]):
+        raise NotImplementedError("resolution method must be defined to use the base class")
 
     @property
     @abstractmethod
@@ -13,12 +18,12 @@ class AbstractDisplay(metaclass=ABCMeta):
     @property
     @abstractmethod
     def caption(self) -> str:
-        raise NotImplementedError("set_caption method must be defined to use the base class")
+        raise NotImplementedError("caption method must be defined to use the base class")
 
     @caption.setter
     @abstractmethod
     def caption(self, text: str):
-        raise NotImplementedError("set_caption method must be defined to use the base class")
+        raise NotImplementedError("caption method must be defined to use the base class")
 
     @abstractmethod
     def update(self):
