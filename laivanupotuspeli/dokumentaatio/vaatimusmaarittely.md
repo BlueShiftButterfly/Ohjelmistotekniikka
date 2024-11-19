@@ -3,13 +3,13 @@
 
 ## Sovelluksen tarkoitus
 
-Sovelluksen tarkoitus on mahdollistaa käyttäjän pelata klassista laivanupotuspeliä. Pelin alussa pelaaja voi asettaa aluksensa pelikentälle, jonka jälkeen vuoroittain pelaaja voi hyökätä vastustajan aluksia vastaan.
+Sovelluksen tarkoitus on mahdollistaa käyttäjän pelata klassista laivanupotuspeliä. Pelin alussa pelaaja voi asettaa aluksensa pelikentälle, jonka jälkeen vuoroittain pelaaja ja vastustaja voivat hyökätä toistensa aluksia vastaan.
 
 ## Suunnitellut perustoiminnallisuudet
 
  - Pelin alussa 
     - Pelaaja voi asetella alukset haluamallaan tavalla
-    - Pelissä on ruudukko, johon pelaaja voi asettaa eri kokoisia aluksia, kuten 1x4, 3x1 jne.
+    - Pelissä on ruudukko, johon pelaaja voi asettaa erikokoisia aluksia, kuten 1x4, 3x1 jne.
     - Aluksen on mahduttava valittuun paikkaan, eikä se voi olla toisten alusten päällä
     - Pelaajan on aseteltava kaikki alukset ennen kuin pelin seuraava vaihe voi alkaa
  - Kun pelaajan alukset ovat paikoillaan
