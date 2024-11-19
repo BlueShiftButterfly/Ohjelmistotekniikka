@@ -12,7 +12,7 @@ Sovellus on luotu Python-versiolla `3.12`. Sovelluksen toimivuudesta ei ole taku
 
 ## Komentorivitoiminnot
 
-Kaikki alla listatut komennot on suoritettava `/laivanupotuspeli/` alihakemistosta!
+__Kaikki alla listatut komennot on suoritettava `/laivanupotuspeli/` alihakemistosta!__
 
 ### Asennus
 
