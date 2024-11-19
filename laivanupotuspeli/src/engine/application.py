@@ -9,10 +9,10 @@ from engine.event import Event
 class Application:
     def __init__(self):
         self.init_pygame()
-        self.event_bus = EventRelay()
-        self.renderer = Renderer(self.event_bus, Display(1280, 720), RenderClock())
-        self.pg_event_handler = PygameEventHandler(self.event_bus)
-        self.event_bus.subscribe(self, Application.quit, Event.ON_APPLICATION_QUIT)
+        self.event_relay = EventRelay()
+        self.renderer = Renderer(self.event_relay, Display(1280, 720), RenderClock())
+        self.pg_event_handler = PygameEventHandler(self.event_relay)
+        self.event_relay.subscribe(self, Application.quit, Event.ON_APPLICATION_QUIT)
         self.renderer.start()
 
     def init_pygame(self):
