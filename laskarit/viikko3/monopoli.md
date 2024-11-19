@@ -16,8 +16,11 @@
     Ruutu <|-- Asema
     Ruutu <|-- Laitos
     Ruutu <|-- Katu
-    Ruutu "1" -- "*" Toiminto
-    Katu "1" -- "1" Pelaaja
+    Ruutu : +Toiminto toiminto
+    Katu : +Pelaaja omistaja
+    Katu : +int taloja
+    Kati : +bool hotelliRakennettu
     Pelinappula "1" -- "*" Pelaaja
     Pelaaja "2..8" -- "1" Monopolipeli
+    Pelaaja : +int rahaa 
 ```
