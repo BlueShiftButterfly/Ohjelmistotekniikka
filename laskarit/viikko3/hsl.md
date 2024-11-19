@@ -4,13 +4,12 @@
 sequenceDiagram
     participant main
     create participant laitehallinto
-    create participant rautatietori
-    create participant ratikka6
-    create participant bussi244
-
     main->>laitehallinto: HKLLaitehallinto()
+    create participant rautatietori
     main->>rautatietori: Lataajalaite()
+    create participant ratikka6
     main->>ratikka6: Lukijalaite()
+    create participant bussi244
     main->>bussi244: Lukijalaite()
 
     main->>laitehallinto: lisaa_lataaja(rautatietori)
@@ -18,11 +17,9 @@ sequenceDiagram
     main->>laitehallinto: lisaa_lukija(bussi244)
 
     create participant lippu_luukku
-
     main->>lippu_luukku: Kioski()
 
     create participant kallen_kortti
-
     lippu_luukku->>kallen_kortti: osta_matkakortti("Kalle)
 
     main->>rautatietori: lataa_arvoa(kallen_kortti)
