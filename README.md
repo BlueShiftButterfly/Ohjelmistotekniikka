@@ -2,7 +2,7 @@
 
 ## Python-versio
 
-Sovellus on luotu Python-versiolla `3.12`. Sovelluksen toimivuudesta ei ole takuuta vanhemilla Python-versiolla.
+Sovellus on luotu Python-versiolla `3.10`. Sovelluksen toimivuudesta ei ole takuuta vanhemilla Python-versiolla.
 
 ## Dokumentaatio
 
