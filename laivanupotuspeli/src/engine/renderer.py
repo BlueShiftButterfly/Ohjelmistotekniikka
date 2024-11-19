@@ -10,11 +10,14 @@ class Renderer:
         self.__render_clock = render_clock
         self.__event_relay = event_relay
 
-    def start(self):
+    def start_loop(self):
         while self.__do_rendering:
             self.__render()
 
-    def stop(self):
+    def unpause(self):
+        self.__do_rendering = True
+
+    def pause(self):
         self.__do_rendering = False
 
     def __render(self):
