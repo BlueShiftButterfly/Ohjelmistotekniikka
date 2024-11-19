@@ -1,7 +1,8 @@
 ## HSL, sekvenssidiagrammi
 
 ```mermaid
- sequenceDiagram
+sequenceDiagram
+    participant main
     create participant laitehallinto
     create participant rautatietori
     create participant ratikka6
