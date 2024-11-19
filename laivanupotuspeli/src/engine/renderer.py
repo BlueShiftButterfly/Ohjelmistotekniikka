@@ -1,13 +1,15 @@
 from engine.display import Display
 from engine.render_clock import RenderClock
+from engine.event_relay import EventRelay
+from engine.event import Event
 
 class Renderer:
-    def __init__(self, display: Display, render_clock: RenderClock):
+    def __init__(self, event_bus: EventRelay, display: Display, render_clock: RenderClock):
         self.__do_rendering = True
         self.__display = display
         self.__render_clock = render_clock
-        self.__loop_functions = []
-    
+        self.__event_bus = event_bus
+
     def start(self):
         while self.__do_rendering:
             self.__render()
@@ -15,12 +17,9 @@ class Renderer:
     def stop(self):
         self.__do_rendering = False
 
-    def register_loop(self, func):
-        self.__loop_functions.append(func)
-
     def __render(self):
-        for loop in self.__loop_functions:
-            loop()
+        self.__event_bus.call(Event.ON_BEFORE_RENDER)
         if self.__do_rendering is False: return
         self.__display.update()
+        self.__event_bus.call(Event.ON_AFTER_RENDER)
         self.__render_clock.tick(60)
