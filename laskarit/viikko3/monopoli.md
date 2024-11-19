@@ -21,6 +21,8 @@
     Katu "1" -- "1" Kadunnimi
     Katu "1" -- "0..4" Talo
     Katu "1" -- "0..1" Hotelli
+    Sattuma "*" -- "*" Sattumakortti
+    Yhteismaa "*" -- "*" Yhteismaakortti
     Pelinappula "1" -- "*" Pelaaja
     Pelaaja "2..8" -- "1" Monopolipeli
     Pelaaja "1" -- "*" Rahaa
