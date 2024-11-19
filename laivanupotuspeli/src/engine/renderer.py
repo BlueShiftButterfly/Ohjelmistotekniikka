@@ -1,10 +1,10 @@
-from engine.display import Display
-from engine.render_clock import RenderClock
+from engine.abstract_display import AbstractDisplay
+from engine.abstract_render_clock import AbstractRenderClock
 from engine.event_relay import EventRelay
 from engine.event import Event
 
 class Renderer:
-    def __init__(self, event_bus: EventRelay, display: Display, render_clock: RenderClock):
+    def __init__(self, event_bus: EventRelay, display: AbstractDisplay, render_clock: AbstractRenderClock):
         self.__do_rendering = True
         self.__display = display
         self.__render_clock = render_clock
