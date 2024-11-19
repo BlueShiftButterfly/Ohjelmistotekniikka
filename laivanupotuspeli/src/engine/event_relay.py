@@ -2,21 +2,21 @@ from engine.event import Event
 
 class EventRelay:
     def __init__(self):
-        self.subscribers:dict[Event, dict] = {}
+        self._subscribers: dict[Event, dict] = {}
 
     def subscribe(self, object, func, event: Event):
-        if event not in self.subscribers.keys():
-            self.subscribers[event] = {}
-        self.subscribers[event][func] = object
+        if event not in self._subscribers.keys():
+            self._subscribers[event] = {}
+        self._subscribers[event][func] = object
 
     def unsubscribe(self, func, event: Event):
-        if event not in self.subscribers.keys():
+        if event not in self._subscribers.keys():
             return
-        if func not in self.subscribers[event].keys():
+        if func not in self._subscribers[event].keys():
             return
-        del self.subscribers[event][func]
+        del self._subscribers[event][func]
 
     def call(self, event: Event):
-        if event not in self.subscribers.keys(): return
-        for func, obj in self.subscribers[event].items():
-            func(obj)
+        if event not in self._subscribers.keys(): return
+        for func, obj in self._subscribers[event].items():
+            func()
