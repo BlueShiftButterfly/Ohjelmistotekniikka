@@ -5,20 +5,21 @@ class EventRelay:
     def __init__(self):
         self._subscribers: dict[Event, dict] = {}
 
-    def subscribe(self, object, func, event: Event):
-        if event not in self._subscribers.keys():
+    def subscribe(self, obj, func, event: Event):
+        if event not in self._subscribers:
             self._subscribers[event] = {}
-        self._subscribers[event][func] = object
+        self._subscribers[event][func] = obj
 
     def unsubscribe(self, func, event: Event):
-        if event not in self._subscribers.keys():
+        if event not in self._subscribers:
             return
-        if func not in self._subscribers[event].keys():
+        if func not in self._subscribers[event]:
             return
         del self._subscribers[event][func]
 
     def call(self, event: Event):
-        if event not in self._subscribers.keys(): return
+        if event not in self._subscribers:
+            return
         for func, obj in self._subscribers[event].items():
             if inspect.ismethod(func):
                 func()
