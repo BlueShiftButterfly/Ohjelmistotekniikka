@@ -1,3 +1,4 @@
+import inspect
 from engine.event import Event
 
 class EventRelay:
@@ -19,4 +20,7 @@ class EventRelay:
     def call(self, event: Event):
         if event not in self._subscribers.keys(): return
         for func, obj in self._subscribers[event].items():
-            func()
+            if inspect.ismethod(func):
+                func()
+            else:
+                func(obj)
