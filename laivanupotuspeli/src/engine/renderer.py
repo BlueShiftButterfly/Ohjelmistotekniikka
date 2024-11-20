@@ -10,25 +10,25 @@ class Renderer:
             display: AbstractDisplay,
             render_clock: AbstractRenderClock
         ):
-        self.__do_rendering = True
-        self.__display = display
-        self.__render_clock = render_clock
-        self.__event_relay = event_relay
+        self._do_rendering = True
+        self._display = display
+        self._render_clock = render_clock
+        self._event_relay = event_relay
 
     def start_loop(self):
-        while self.__do_rendering:
-            self.__render()
+        while self._do_rendering:
+            self._render()
 
     def unpause(self):
-        self.__do_rendering = True
+        self._do_rendering = True
 
     def pause(self):
-        self.__do_rendering = False
+        self._do_rendering = False
 
-    def __render(self):
-        self.__event_relay.call(Event.ON_BEFORE_RENDER)
-        if self.__do_rendering is False:
+    def _render(self):
+        self._event_relay.call(Event.ON_BEFORE_RENDER)
+        if self._do_rendering is False:
             return
-        self.__display.update()
-        self.__event_relay.call(Event.ON_AFTER_RENDER)
-        self.__render_clock.tick(60)
+        self._display.update()
+        self._event_relay.call(Event.ON_AFTER_RENDER)
+        self._render_clock.tick(60)
