@@ -1,5 +1,5 @@
 import pygame
-from engine.abstract_display import AbstractDisplay
+from engine.rendering.abstract_display import AbstractDisplay
 
 class Display(AbstractDisplay):
     def __init__(self, screen_width: int, screen_height: int):

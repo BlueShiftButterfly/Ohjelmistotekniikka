@@ -1,3 +1,4 @@
+import pygame
 from abc import ABCMeta, abstractmethod
 
 class AbstractDisplay(metaclass=ABCMeta):
@@ -12,7 +13,7 @@ class AbstractDisplay(metaclass=ABCMeta):
 
     @property
     @abstractmethod
-    def surface(self):
+    def surface(self) -> pygame.Surface:
         raise NotImplementedError("surface method must be defined to use the base class")
 
     @property
