@@ -1,7 +1,7 @@
 import pygame
-from engine.renderer import Renderer
-from engine.display import Display
-from engine.render_clock import RenderClock
+from engine.rendering.renderer import Renderer
+from engine.rendering.display import Display
+from engine.rendering.render_clock import RenderClock
 from engine.pygame_event_handler import PygameEventHandler
 from engine.event_relay import EventRelay
 from engine.event import Event
