@@ -7,12 +7,12 @@
 
     Player "1" --|> "1" Board
     Board "1" --|> "*" Ship
+    Board "1" --|> "*" Guess
     GameController "1" --|> "2" Player
 
     class Guess{
         bool hitShip
         tuple guessCoordinates
-        Player owner
     }
     class Player{
         Board board
@@ -22,7 +22,7 @@
         ShipType shipType
         bool isSunk
         int tilesLeft
-        List<tuple> tileCoordinates
+        List<tuple> shipTilesCoordinates
     }
     class Board{
         List<Ship> ships
