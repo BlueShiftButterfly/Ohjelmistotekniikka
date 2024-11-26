@@ -1,5 +1,5 @@
-import pygame
 from abc import ABCMeta, abstractmethod
+import pygame
 
 class AbstractDisplay(metaclass=ABCMeta):
     @property

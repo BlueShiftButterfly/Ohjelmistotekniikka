@@ -2,7 +2,6 @@ from engine.rendering.abstract_display import AbstractDisplay
 from engine.rendering.abstract_render_clock import AbstractRenderClock
 from engine.event_relay import EventRelay
 from engine.event import Event
-import engine.rendering.colors as colors
 from engine.game_board_visual import GameBoardVisual
 
 class Renderer:
@@ -17,8 +16,13 @@ class Renderer:
         self._render_clock = render_clock
         self._event_relay = event_relay
         self._renderables = []
-        self._background_color = colors.DARK_BLUE
-        self.bg = GameBoardVisual(10,10,self._display.resolution[0]/2-320,self._display.resolution[1]/2-320,64)
+        self.bg = GameBoardVisual(
+            10,
+            10,
+            self._display.resolution[0]/2-320,
+            self._display.resolution[1]/2-320,
+            64
+        )
 
     def start_loop(self):
         while self._do_rendering:
