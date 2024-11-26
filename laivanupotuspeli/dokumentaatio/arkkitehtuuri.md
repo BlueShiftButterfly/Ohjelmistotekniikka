@@ -17,7 +17,6 @@
     }
     class Player{
         Board board
-        +processTurn(List<Guess> playerGuesses) Guess
     }
     class Ship{
         ShipType shipType
@@ -32,9 +31,6 @@
     class GameController {
         Player player1        
         Player player2
-
-        +processPlayerTurn(Player player)
-        +checkWinCondition(Player player) bool
     }
     class ShipType{
         List<tuple> shipTilesCoordinates
