@@ -9,6 +9,7 @@
     Board "1" --|> "*" Ship
     Board "1" --|> "*" Guess
     GameController "1" --|> "2" Player
+    Ship "1" --|> "1" ShipType
 
     class Guess{
         bool hitShip
@@ -22,7 +23,7 @@
         ShipType shipType
         bool isSunk
         int tilesLeft
-        List<tuple> shipTilesCoordinates
+        int direction
     }
     class Board{
         List<Ship> ships
@@ -34,5 +35,8 @@
 
         +processPlayerTurn(Player player)
         +checkWinCondition(Player player) bool
+    }
+    class ShipType{
+        List<tuple> shipTilesCoordinates
     }
 ```
