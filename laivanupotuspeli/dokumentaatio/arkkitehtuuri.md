@@ -5,9 +5,9 @@
 ```mermaid
  classDiagram
 
-    Player "1" -- "1" Board
-    Board "1" -- "*" Ship
-    GameController "1" -- "2" Player
+    Player "1" --|> "1" Board
+    Board "1" --|> "*" Ship
+    GameController "1" --|> "2" Player
 
     class Player{
         Board playerBoard
