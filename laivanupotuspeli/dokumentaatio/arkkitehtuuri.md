@@ -9,20 +9,27 @@
     Board "1" --|> "*" Ship
     GameController "1" --|> "2" Player
 
+    class Guess{
+        bool hitShip
+        tuple guessCoordinates
+        Player owner
+    }
     class Player{
-        Board playerBoard
+        Board board
+        +processTurn(List<Guess> playerGuesses) Guess
     }
     class Ship{
         ShipType shipType
         bool isSunk
         int tilesLeft
+        List<tuple> tileCoordinates
     }
     class Board{
-        List ships
-        List playerGuesses
+        List<Ship> ships
+        List<Guess> opponentGuesses
     }
     class GameController {
-        Player player1
+        Player player1        
         Player player2
     }
 ```
