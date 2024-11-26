@@ -9,6 +9,8 @@ Sovellus on luotu Python-versiolla `3.10`. Sovelluksen toimivuudesta ei ole taku
  - [Alustava määrittelydokumentti](https://github.com/BlueShiftButterfly/Ohjelmistotekniikka/blob/main/laivanupotuspeli/dokumentaatio/vaatimusmaarittely.md)
  - [Changelog](https://github.com/BlueShiftButterfly/Ohjelmistotekniikka/blob/main/laivanupotuspeli/dokumentaatio/changelog.md)
  - [Tuntikirjanpito](https://github.com/BlueShiftButterfly/Ohjelmistotekniikka/blob/main/laivanupotuspeli/dokumentaatio/tuntikirjanpito.md) 
+ - [Arkkitehtuuri](https://github.com/BlueShiftButterfly/Ohjelmistotekniikka/blob/main/laivanupotuspeli/dokumentaatio/arkkitehtuuri.md) 
+
 
 ## Komentorivitoiminnot
 
