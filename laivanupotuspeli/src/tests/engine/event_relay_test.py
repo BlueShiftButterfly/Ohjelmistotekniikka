@@ -27,25 +27,25 @@ class TestEventRelay(unittest.TestCase):
         self.event_relay = EventRelay()
 
     def test_method_is_called_when_subcribed(self):
-        with patch.object(self.subscriber, "to_be_called") as this_should_be_called:
+        with patch.object(self.subscriber, "subcall") as this_should_be_called:
             self.event_relay.subscribe(self.subscriber, self.subscriber.subcall, StubEvent.TEST0)
             self.event_relay.call(StubEvent.TEST0)
             this_should_be_called.assert_called()
 
     def test_method_is_not_called_when_not_subcribed(self):
-        with patch.object(self.subscriber, "to_be_called") as this_should_be_called:
+        with patch.object(self.subscriber, "subcall") as this_should_be_called:
             self.event_relay.call(StubEvent.TEST0)
             self.assertFalse(this_should_be_called.called)
 
     def test_method_is_not_called_after_unsubcribed(self):
-        with patch.object(self.subscriber, "to_be_called") as this_should_be_called:
+        with patch.object(self.subscriber, "subcall") as this_should_be_called:
             self.event_relay.subscribe(self.subscriber, self.subscriber.subcall, StubEvent.TEST0)
             self.event_relay.unsubscribe(self.subscriber.subcall, StubEvent.TEST0)
             self.event_relay.call(StubEvent.TEST0)
             self.assertFalse(this_should_be_called.called)
 
     def test_method_is_not_called_after_unsubcribed_event_in_subscribers(self):
-        with patch.object(self.subscriber, "to_be_called") as this_should_be_called:
+        with patch.object(self.subscriber, "subcall") as this_should_be_called:
             self.event_relay.subscribe(self.subscriber, self.subscriber.subcall, StubEvent.TEST0)
             self.event_relay.subscribe(self.subscriber2, self.subscriber2.subcall, StubEvent.TEST0)
             self.event_relay.unsubscribe(self.subscriber.subcall, StubEvent.TEST0)
