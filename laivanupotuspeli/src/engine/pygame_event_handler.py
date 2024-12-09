@@ -11,3 +11,5 @@ class PygameEventHandler:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self._event_relay.call(Event.ON_APPLICATION_QUIT)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self._event_relay.call(Event.ON_MOUSE0_PRESS)

@@ -17,6 +17,7 @@ class Renderer:
         self._event_relay = event_relay
         self._renderables = []
         self.bg = GameBoardVisual(
+            event_relay,
             10,
             10,
             self._display.resolution[0]/2-320,
@@ -38,6 +39,7 @@ class Renderer:
         self._event_relay.call(Event.ON_BEFORE_RENDER)
         if self._do_rendering is False:
             return
+        self.bg.update()
         self._display.surface.blit(self.bg.surface, (self.bg.x, self.bg.y))
         self._display.update()
         self._event_relay.call(Event.ON_AFTER_RENDER)
