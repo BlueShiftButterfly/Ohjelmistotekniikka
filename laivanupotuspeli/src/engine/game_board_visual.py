@@ -29,10 +29,6 @@ class GameBoardVisual:
         )
         self.markers: list[tuple[int, int]] = []
         self.event_relay.subscribe(self, self.on_mouse_press, Event.ON_MOUSE0_PRESS)
-        #self.render_background()
-        #self.render_markers([(0,0), (5,2), [9,9], [2,6]])
-        #print(self.screen_coords_to_grid_coords((400,400)))
-        #self.highlight_square(self.screen_coords_to_grid_coords((400,400)), COLORS.RED)
 
     def render_background(self):
         for y in range(int(self.cells_y)):
