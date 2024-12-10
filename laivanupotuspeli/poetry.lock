@@ -338,6 +338,17 @@ tomli = {version = ">=1", markers = "python_version < \"3.11\""}
 dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "pygments (>=2.7.2)", "requests", "setuptools", "xmlschema"]
 
 [[package]]
+name = "thorpy"
+version = "2.1.10"
+description = "GUI library for pygame"
+optional = false
+python-versions = "*"
+files = [
+    {file = "thorpy-2.1.10-py3-none-any.whl", hash = "sha256:b60d0f3ee816dfcd4d50d9769aafb723624e30c8cb30037f1a5f3c7639dcf0e9"},
+    {file = "thorpy-2.1.10.tar.gz", hash = "sha256:24b3aeb4d8c685e691921d85d4293b51f11564fe09f9966dec14b3f13463909d"},
+]
+
+[[package]]
 name = "tomli"
 version = "2.1.0"
 description = "A lil' TOML parser"
@@ -373,4 +384,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "968ba24f52d9dd8ccdac885095b6718efaab116fe97b40932f85b8ffd1919b59"
+content-hash = "6f566140074e6c9259f2057bebd8ca6cae8938042eada428a931de13829c13c3"
