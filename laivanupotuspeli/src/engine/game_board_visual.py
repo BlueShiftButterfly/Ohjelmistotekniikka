@@ -56,7 +56,7 @@ class GameBoardVisual:
             self.surface.blit(self.marker_sprite, (coord[0]*self.cellsize, coord[1]*self.cellsize))
 
     def highlight_square(self, coordinates: tuple[int, int], color: pygame.Color):
-        if (self.are_coordinates_within_bounds(coordinates) is False):
+        if self.are_coordinates_within_bounds(coordinates) is False:
             return
         pygame.draw.line(
             self.surface,
@@ -87,7 +87,7 @@ class GameBoardVisual:
             2
         )
 
-    def screen_coords_to_grid_coords(self, coordinates: tuple[int, int]):
+    def screen_to_grid_coords(self, coordinates: tuple[int, int]):
         return (
             math.floor((coordinates[0] - self.x) / self.cellsize),
             math.floor((coordinates[1] - self.y) / self.cellsize)
@@ -99,10 +99,10 @@ class GameBoardVisual:
     def update(self):
         self.render_background()
         self.render_markers(self.markers)
-        self.highlight_square(self.screen_coords_to_grid_coords(pygame.mouse.get_pos()), COLORS.GREEN)
+        self.highlight_square(self.screen_to_grid_coords(pygame.mouse.get_pos()), COLORS.GREEN)
 
     def on_mouse_press(self):
-        grid_pos = self.screen_coords_to_grid_coords(pygame.mouse.get_pos())
+        grid_pos = self.screen_to_grid_coords(pygame.mouse.get_pos())
         if grid_pos in self.markers:
             return
         self.markers.append(grid_pos)

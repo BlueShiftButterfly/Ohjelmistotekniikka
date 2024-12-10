@@ -1,6 +1,6 @@
 from enum import Enum
 
-class PlayerPhase:
+class PlayerPhase(Enum):
     WAIT_SHIP_PLACEMENT = 0
     PLACING_SHIPS = 1
     WAITING_FOR_GUESS_BEGIN = 2

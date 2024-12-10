@@ -18,7 +18,7 @@ class Board:
         guess_coords = (x, y)
         if self.are_coords_within_bounds(guess_coords) is False:
             return False
-        if guess_coords in self.opponent_guesses.keys():
+        if guess_coords in self.opponent_guesses:
             return False
         hit_ship = False
         for ship in self.ships.values():
@@ -32,7 +32,7 @@ class Board:
         ship_coords = (ship.x, ship.y)
         if self.are_coords_within_bounds(ship_coords) is False:
             return False
-        if ship_coords in self.ships.keys():
+        if ship_coords in self.ships:
             return False
         for existing_ship in self.ships:
             if self.do_ships_overlap(ship, existing_ship):

@@ -27,9 +27,8 @@ class Ship:
     @property
     def hit_tiles_count(self):
         return self._hit_tiles_count
-    
+
     def incerement_hit_count(self):
         self._hit_tiles_count += 1
         if self.hit_tiles_count >= len(self.ship_type.get_tiles()):
             self.is_sunk = True
-    
