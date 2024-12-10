@@ -3,6 +3,7 @@ from engine.rendering.abstract_render_clock import AbstractRenderClock
 from engine.event_relay import EventRelay
 from engine.event import Event
 from engine.game_board_visual import GameBoardVisual
+from engine.rendering.gui_renderer import GUIRenderer
 
 class Renderer:
     def __init__(
@@ -24,6 +25,7 @@ class Renderer:
             self._display.resolution[1]/2-320,
             64
         )
+        self.gui_renderer = GUIRenderer(event_relay, self._display)
 
     def start_loop(self):
         while self._do_rendering:
@@ -41,6 +43,7 @@ class Renderer:
             return
         self.bg.update()
         self._display.surface.blit(self.bg.surface, (self.bg.x, self.bg.y))
+        self._event_relay.call(Event.ON_AFTER_RENDER_BEFORE_DISPLAY)
         self._display.update()
         self._event_relay.call(Event.ON_AFTER_RENDER)
         self._render_clock.tick(60)
