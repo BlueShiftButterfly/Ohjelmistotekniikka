@@ -17,11 +17,11 @@ class EventRelay:
             return
         del self._subscribers[event][func]
 
-    def call(self, event: Event):
+    def call(self, event: Event, *args):
         if event not in self._subscribers:
             return
         for func, obj in self._subscribers[event].items():
             if inspect.ismethod(func):
-                func()
+                func(*args)
             else:
-                func(obj)
+                func(obj, *args)
