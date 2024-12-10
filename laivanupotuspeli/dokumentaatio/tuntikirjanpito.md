@@ -7,4 +7,6 @@
 | 19.11. | 5    | Sovelluksen toiminnallisuuden koodausta sekä testausta. Myös dokementaation kirjoittamista. |
 | 21.11. | 3    | Pelin renderöinnin kehitystä |
 | 26.11. | 3    | Dokumentaatiota ja pelin renderöinnin kehitystä |
-| yht    | 13   |  | 
+| 09.12. | 1    | Pelaaja voi lisätä merkkejä ruudukkoon |
+| 10.12. | 3    | Lisätty pelin toiminnallisuuteen liittyviä luokkia. Kehitetty renderöintiä ja UI:ta |
+| yht    | 17   |  | 
