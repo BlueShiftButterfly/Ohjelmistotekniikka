@@ -4,6 +4,7 @@ from engine.event_relay import EventRelay
 from engine.event import Event
 from engine.game_board_visual import GameBoardVisual
 from engine.rendering.gui_renderer import GUIRenderer
+from engine.asset_loader import AssetLoader
 
 class Renderer:
     def __init__(
@@ -17,8 +18,11 @@ class Renderer:
         self._render_clock = render_clock
         self._event_relay = event_relay
         self._renderables = []
+        self.asset_loader = AssetLoader()
+        self.asset_loader.load()
         self.bg = GameBoardVisual(
             event_relay,
+            self.asset_loader,
             10,
             10,
             self._display.resolution[0]/2-320,
@@ -42,7 +46,7 @@ class Renderer:
         if self._do_rendering is False:
             return
         self.bg.update()
-        self._display.surface.blit(self.bg.surface, (self.bg.x, self.bg.y))
+        self._display.surface.blit(self.bg.board_surface, (self.bg.x, self.bg.y))
         self._event_relay.call(Event.ON_AFTER_RENDER_BEFORE_DISPLAY)
         self._display.update()
         self._event_relay.call(Event.ON_AFTER_RENDER)
