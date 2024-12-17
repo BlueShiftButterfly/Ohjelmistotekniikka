@@ -9,4 +9,5 @@
 | 26.11. | 3    | Dokumentaatiota ja pelin renderöinnin kehitystä |
 | 09.12. | 1    | Pelaaja voi lisätä merkkejä ruudukkoon |
 | 10.12. | 3    | Lisätty pelin toiminnallisuuteen liittyviä luokkia. Kehitetty renderöintiä ja UI:ta |
-| yht    | 17   |  | 
+| 17.12. | 2    | Lisätty aluksen lisäykseen liittyviä grafiikoita ja ominaisuuksia |
+| yht    | 19   |  | 
