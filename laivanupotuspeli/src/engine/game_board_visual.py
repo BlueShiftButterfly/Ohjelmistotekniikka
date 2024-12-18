@@ -26,6 +26,9 @@ class GameBoardVisual:
 
         self.markers: list[tuple[int, int]] = []
         self.event_relay.subscribe(self, self.on_mouse_press, Event.ON_MOUSE0_PRESS)
+        self.preview_ships = []
+        self.event_relay.subscribe(self, self.on_ship_rotate, Event.ON_SHIP_ROTATE)
+        self.preview_ship_rotation = Direction.VERTICAL
 
     def render_background(self):
         for y in range(int(self.cells_y)):
@@ -107,19 +110,15 @@ class GameBoardVisual:
 
     def update(self):
         self.render_background()
-        self.draw_ship(
-            Ship(1, 9, SHIP_TYPES["4x1"], Direction.VERTICAL)
-        )
-        self.draw_ship_preview("4x1", Direction.HORIZONTAL, self.screen_to_grid_coords(pygame.mouse.get_pos()))
-        #self.render_markers(self.markers)
-        #self.highlight_square(self.screen_to_grid_coords(pygame.mouse.get_pos()), COLORS.GREEN)
+        for s in self.preview_ships:
+            self.draw_ship(s)
+        self.draw_ship_preview("2x1", self.preview_ship_rotation, self.screen_to_grid_coords(pygame.mouse.get_pos()))
 
     def on_mouse_press(self):
-        #grid_pos = self.screen_to_grid_coords(pygame.mouse.get_pos())
-        #if grid_pos in self.markers:
-        #    return
-        #self.markers.append(grid_pos)
-        pass
+        s_pos = self.screen_to_grid_coords(pygame.mouse.get_pos())
+        self.preview_ships.append(
+            Ship(s_pos[0], s_pos[1], SHIP_TYPES["2x1"], self.preview_ship_rotation)
+        )
 
     def draw_ship(self, ship: Ship):
         y_mod = 0
@@ -140,3 +139,9 @@ class GameBoardVisual:
             surf,
             (pos[0]*self.cell_size, (pos[1] + y_mod)*self.cell_size)
         )
+
+    def on_ship_rotate(self):
+        if self.preview_ship_rotation == Direction.VERTICAL:
+            self.preview_ship_rotation = Direction.HORIZONTAL
+        else:
+            self.preview_ship_rotation = Direction.VERTICAL 
