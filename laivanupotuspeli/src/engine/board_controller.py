@@ -15,8 +15,10 @@ class BoardController:
         self.preview_ship_rotation = Direction.VERTICAL
         self.selected_ship_type = None
         self.event_relay.subscribe(self, self.on_ship_rotate, Event.ON_SHIP_ROTATE)
-        self.event_relay.subscribe(self, self.on_mouse_press, Event.ON_MOUSE0_PRESS)
+        self.event_relay.subscribe(self, self.on_left_click, Event.ON_MOUSE0_PRESS)
         self.event_relay.subscribe(self, self.update, Event.ON_BEFORE_RENDER)
+        self.event_relay.subscribe(self, self.on_select_ship_type, Event.ON_SELECT_SHIP_TYPE)
+        self.event_relay.subscribe(self, self.on_confirm_placement, Event.ON_CONFIRM_SHIP_PLACEMENT)
 
     def update(self):
         if self.selected_ship_type is None:
@@ -24,11 +26,11 @@ class BoardController:
         s_pos = self.board_visual.screen_to_grid_coords(pygame.mouse.get_pos())
         self.board_visual.draw_ship_preview(self.selected_ship_type, self.preview_ship_rotation, s_pos)
 
-    def on_mouse_press(self):
+    def on_left_click(self):
         if self.selected_ship_type is None:
             return
         s_pos = self.board_visual.screen_to_grid_coords(pygame.mouse.get_pos())
-        self.board_visual.preview_ships.append(
+        self.board_visual.board_ships.append(
             Ship(s_pos[0], s_pos[1], SHIP_TYPES[self.selected_ship_type], self.preview_ship_rotation)
         )
 
@@ -37,3 +39,9 @@ class BoardController:
             self.preview_ship_rotation = Direction.HORIZONTAL
         else:
             self.preview_ship_rotation = Direction.VERTICAL 
+
+    def on_select_ship_type(self, ship_type: str):
+        self.selected_ship_type = ship_type
+
+    def on_confirm_placement(self):
+        self.selected_ship_type = None
