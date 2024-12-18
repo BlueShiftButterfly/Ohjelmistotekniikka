@@ -7,8 +7,9 @@ from game.ship import Ship
 from game.direction import Direction
 from engine.asset_loader import AssetLoader
 from game.game import SHIP_TYPES
+from engine.rendering.abstract_renderable import AbstractRenderable
 
-class GameBoardVisual:
+class GameBoardVisual(AbstractRenderable):
     def __init__(self, event_relay: EventRelay, asset_loader: AssetLoader, cells_x: int, cells_y: int, x: int, y: int, cell_size: int):
         self.event_relay = event_relay
         self.asset_loader = asset_loader
@@ -113,6 +114,14 @@ class GameBoardVisual:
         for s in self.preview_ships:
             self.draw_ship(s)
         self.draw_ship_preview("2x1", self.preview_ship_rotation, self.screen_to_grid_coords(pygame.mouse.get_pos()))
+
+    @property
+    def position(self) -> tuple[int, int]:
+        return (self.x, self.y)
+
+    @property
+    def surface(self) -> pygame.Surface:
+        return self.board_surface
 
     def on_mouse_press(self):
         s_pos = self.screen_to_grid_coords(pygame.mouse.get_pos())

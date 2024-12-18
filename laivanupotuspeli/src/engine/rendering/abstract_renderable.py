@@ -3,7 +3,7 @@ import pygame
 
 class AbstractRenderable(metaclass=ABCMeta):
     @abstractmethod
-    def update(self, delta: float):
+    def update(self):
         raise NotImplementedError("update method must be defined to use the base class")
 
     @property

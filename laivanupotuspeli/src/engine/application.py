@@ -13,6 +13,8 @@ class Application:
         self.renderer = Renderer(self.event_relay, Display(1280, 720), RenderClock())
         self.pg_event_handler = PygameEventHandler(self.event_relay)
         self.event_relay.subscribe(self, Application.quit, Event.ON_APPLICATION_QUIT)
+
+    def start(self):
         self.renderer.start_loop()
 
     def init_pygame(self):
