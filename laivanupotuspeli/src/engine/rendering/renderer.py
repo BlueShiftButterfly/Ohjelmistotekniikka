@@ -44,7 +44,6 @@ class Renderer:
         if self._do_rendering is False:
             return
         for r in self._renderables:
-            r.update()
             self._display.surface.blit(r.surface, r.position)
         self._event_relay.call(Event.ON_AFTER_RENDER_BEFORE_DISPLAY)
         self._display.update()

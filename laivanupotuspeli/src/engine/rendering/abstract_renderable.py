@@ -2,10 +2,6 @@ from abc import ABCMeta, abstractmethod
 import pygame
 
 class AbstractRenderable(metaclass=ABCMeta):
-    @abstractmethod
-    def update(self):
-        raise NotImplementedError("update method must be defined to use the base class")
-
     @property
     @abstractmethod
     def position(self) -> tuple[int, int]:
