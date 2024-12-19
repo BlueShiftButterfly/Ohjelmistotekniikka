@@ -16,6 +16,8 @@ class PygameEventHandler:
                 buttons = pygame.mouse.get_pressed()
                 if buttons[0] is True:
                     self._event_relay.call(Event.ON_MOUSE0_PRESS)
+                if buttons[2] is True:
+                    self._event_relay.call(Event.ON_MOUSE1_PRESS)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
                     self._event_relay.call(Event.ON_SHIP_ROTATE)

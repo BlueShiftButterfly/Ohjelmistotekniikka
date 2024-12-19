@@ -10,11 +10,15 @@ class Player:
         self.board = board
         self.current_phase = PlayerPhase.WAIT_SHIP_PLACEMENT
         self.event_relay.subscribe(self, self.start_ship_placement, Event.ROUND_START_SHIP_PLACEMENT)
+        if self.is_player1:
+            self.event_relay.subscribe(self, self.finish_ship_placement, Event.ON_USER_CONFIRM_SHIP_PLACEMENT)
 
     def start_ship_placement(self):
         self.current_phase = PlayerPhase.PLACING_SHIPS
 
     def finish_ship_placement(self):
+        if self.board.placed_all_ships is False:
+            return
         self.current_phase = PlayerPhase.WAITING_FOR_GUESS_BEGIN
         event_to_call = Event.PLAYER1_FINISHED_PLACING_SHIPS
         if self.is_player1 is False:
