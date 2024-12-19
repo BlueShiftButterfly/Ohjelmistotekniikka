@@ -24,7 +24,7 @@ class GameBoardVisual(AbstractRenderable):
 
         self.bg_sprite = self.scale_sprite_to_cell_size(self.asset_loader.sprites["sea_bg"])
         self.marker_sprite = self.scale_sprite_to_cell_size(self.asset_loader.sprites["red_marker"], True)
-        self.event_relay.subscribe(self, self.update, Event.ON_BEFORE_RENDER)
+        self.event_relay.subscribe(self, self.update, Event.ON_RENDER)
         self.markers: list[tuple[int, int]] = []
         self.board_ships = []
         self.preview_ships = []
@@ -107,7 +107,7 @@ class GameBoardVisual(AbstractRenderable):
         )
         return surf
 
-    def update(self):
+    def update(self, delta: float):
         self.render_background()
         for s in self.board_ships:
             self.draw_ship(s)

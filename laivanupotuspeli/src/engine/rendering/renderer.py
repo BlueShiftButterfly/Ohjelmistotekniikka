@@ -5,6 +5,7 @@ from engine.event import Event
 from engine.rendering.abstract_renderable import AbstractRenderable
 from engine.rendering.gui_renderer import GUIRenderer
 from engine.asset_loader import AssetLoader
+from engine.rendering import colors
 
 class Renderer:
     def __init__(
@@ -21,6 +22,7 @@ class Renderer:
         self.asset_loader = AssetLoader()
         self.asset_loader.load()
         self.gui_renderer = GUIRenderer(event_relay, self._display)
+        self.delta: float = 0
 
     def add_renderable(self, renderable: AbstractRenderable):
         self._renderables.append(renderable)
@@ -40,12 +42,14 @@ class Renderer:
         self._do_rendering = False
 
     def _render(self):
-        self._event_relay.call(Event.ON_BEFORE_RENDER)
         if self._do_rendering is False:
             return
+        self._display.surface.fill(colors.BLACK)
+        self._event_relay.call(Event.ON_BEFORE_RENDER)
+        self.delta = self._render_clock.tick(60)/1000.0
+        self._event_relay.call(Event.ON_RENDER, self.delta)
         for r in self._renderables:
             self._display.surface.blit(r.surface, r.position)
         self._event_relay.call(Event.ON_AFTER_RENDER_BEFORE_DISPLAY)
         self._display.update()
         self._event_relay.call(Event.ON_AFTER_RENDER)
-        self._render_clock.tick(60)

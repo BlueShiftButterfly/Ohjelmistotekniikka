@@ -18,11 +18,11 @@ class BoardController:
         self.event_relay.subscribe(self, self.on_ship_rotate, Event.ON_SHIP_ROTATE)
         self.event_relay.subscribe(self, self.on_left_click, Event.ON_MOUSE0_PRESS)
         self.event_relay.subscribe(self, self.on_right_click, Event.ON_MOUSE1_PRESS)
-        self.event_relay.subscribe(self, self.update, Event.ON_BEFORE_RENDER)
+        self.event_relay.subscribe(self, self.update, Event.ON_RENDER)
         self.event_relay.subscribe(self, self.on_select_ship_type, Event.ON_SELECT_SHIP_TYPE)
         self.event_relay.subscribe(self, self.on_confirm_placement, Event.ON_CONFIRM_SHIP_BUTTON)
 
-    def update(self):
+    def update(self, delta: float):
         if self.selected_ship_type is None or self.is_placing_ships is False:
             return
         if self.game_board.has_ship_type_left(SHIP_TYPES[self.selected_ship_type]) is False:
