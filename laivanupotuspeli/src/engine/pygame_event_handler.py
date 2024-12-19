@@ -19,4 +19,6 @@ class PygameEventHandler:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
                     self._event_relay.call(Event.ON_SHIP_ROTATE)
+                if event.key == pygame.K_ESCAPE:
+                    self._event_relay.call(Event.ON_APPLICATION_QUIT)
         self._event_relay.call(Event.ON_PYGAME_EVENTS_UPDATE, events)
