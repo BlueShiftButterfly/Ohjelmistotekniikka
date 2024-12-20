@@ -16,10 +16,13 @@ class GameController:
 
     def on_player_finish_ship_placement(self):
         if (
-            self.player1.current_phase == PlayerPhase.WAITING_FOR_GUESS_BEGIN and
-            self.player2.current_phase == PlayerPhase.WAITING_FOR_GUESS_BEGIN
+            self.player1.current_phase == PlayerPhase.WAITING_FOR_GUESS_BEGIN# and
+            #self.player2.current_phase == PlayerPhase.WAITING_FOR_GUESS_BEGIN
         ):
             self.start_player_turn(True)
 
     def start_player_turn(self, is_player1_turn: bool):
-        pass
+        if is_player1_turn:
+            self.game_event_relay.call(Event.PLAYER1_START_GUESS)
+        else:
+            self.game_event_relay.call(Event.PLAYER2_START_GUESS)

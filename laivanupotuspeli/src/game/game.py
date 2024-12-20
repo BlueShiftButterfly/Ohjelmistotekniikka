@@ -16,3 +16,4 @@ class Game:
         self.player1 = Player(self.event_relay, True, Board(10, 10))
         self.player2 = Player(self.event_relay, False, Board(10, 10))
         self.game_controller = GameController(self.player1, self.player2, self.event_relay)
+        self.game_controller.begin_ship_placement_phase()
