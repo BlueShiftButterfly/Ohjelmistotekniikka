@@ -49,6 +49,8 @@ class Renderer:
         self.delta = self._render_clock.tick(60)/1000.0
         self._event_relay.call(Event.ON_RENDER, self.delta)
         for r in self._renderables:
+            if r.enabled is False:
+                continue
             self._display.surface.blit(r.surface, r.position)
         self._event_relay.call(Event.ON_AFTER_RENDER_BEFORE_DISPLAY)
         self._display.update()

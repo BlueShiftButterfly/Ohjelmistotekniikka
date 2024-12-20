@@ -10,7 +10,7 @@ from game.game import SHIP_TYPES
 from engine.rendering.abstract_renderable import AbstractRenderable
 
 class GameBoardVisual(AbstractRenderable):
-    def __init__(self, event_relay: EventRelay, asset_loader: AssetLoader, cells_x: int, cells_y: int, x: int, y: int, cell_size: int):
+    def __init__(self, event_relay: EventRelay, asset_loader: AssetLoader, cells_x: int, cells_y: int, x: int, y: int, cell_size: int, enabled: bool = True):
         self.event_relay = event_relay
         self.asset_loader = asset_loader
         self.height = cells_x * cell_size
@@ -28,6 +28,8 @@ class GameBoardVisual(AbstractRenderable):
         self.markers: list[tuple[int, int]] = []
         self.board_ships = []
         self.preview_ships = []
+
+        self._enabled = enabled
 
     def render_background(self):
         for y in range(int(self.cells_y)):
@@ -108,9 +110,19 @@ class GameBoardVisual(AbstractRenderable):
         return surf
 
     def update(self, delta: float):
+        if self._enabled is False:
+            return
         self.render_background()
         for s in self.board_ships:
             self.draw_ship(s)
+
+    @property
+    def enabled(self) -> bool:
+        return self._enabled
+
+    @enabled.setter
+    def enabled(self, value: bool):
+        self._enabled = value
 
     @property
     def position(self) -> tuple[int, int]:
