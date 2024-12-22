@@ -25,10 +25,38 @@ class AIPlayer(AbstractPlayer):
         self._event_relay.subscribe(self, self.submit_guess, Event.ON_PLAYER2_SUBMIT_GUESS)
 
     def request_ships(self, board: Board):
-        board.add_ship(Ship(1,8, SHIP_TYPES["2x1"], Direction.VERTICAL))
-        board.add_ship(Ship(2,8, SHIP_TYPES["3x1"], Direction.VERTICAL))
-        board.add_ship(Ship(3,8, SHIP_TYPES["3x1"], Direction.VERTICAL))
-        board.add_ship(Ship(4,8, SHIP_TYPES["4x1"], Direction.VERTICAL))
+        for _ in range(100):
+            if board.add_ship(Ship(
+                random.randint(0, 9),
+                random.randint(0, 9),
+                SHIP_TYPES["2x1"],
+                random.randint(0, 1)
+            )):
+                break
+        for _ in range(100):
+            if board.add_ship(Ship(
+                random.randint(0, 9),
+                random.randint(0, 9),
+                SHIP_TYPES["3x1"],
+                random.randint(0, 1)
+            )):
+                break
+        for _ in range(100):
+            if board.add_ship(Ship(
+                random.randint(0, 9),
+                random.randint(0, 9),
+                SHIP_TYPES["3x1"],
+                random.randint(0, 1)
+            )):
+                break
+        for _ in range(100):
+            if board.add_ship(Ship(
+                random.randint(0, 9),
+                random.randint(0, 9),
+                SHIP_TYPES["4x1"],
+                random.randint(0, 1)
+            )):
+                break
         self._event_relay.call(Event.PLAYER2_FINISHED_PLACING_SHIPS, board)
         self._game_controller.set_player_ships(self._is_player1, board)
 
