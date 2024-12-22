@@ -7,8 +7,15 @@ from engine.event_relay import EventRelay
 from engine.event import Event
 
 class Application:
+    """
+    Main application class. Contains all game-engine components.
+    """
     def __init__(self, event_relay: EventRelay):
-        self.init_pygame()
+        """
+        Args:
+            event_relay: event_relay object for event based communication
+        """
+        self._init_pygame()
         self.event_relay = event_relay
         self.renderer = Renderer(self.event_relay, Display(1280, 900), RenderClock())
         self.pg_event_handler = PygameEventHandler(self.event_relay)
@@ -16,10 +23,16 @@ class Application:
         self.renderer.display.caption = "Battleship"
 
     def start(self):
+        """
+        Start the application and create window.
+        """
         self.renderer.start_loop()
 
-    def init_pygame(self):
+    def _init_pygame(self):
         pygame.init()
 
     def quit(self):
+        """
+        Quits the application to desktop.
+        """
         pygame.quit()

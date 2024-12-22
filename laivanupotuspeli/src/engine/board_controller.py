@@ -9,12 +9,21 @@ from engine.game_board_visual import GameBoardVisual
 from engine.rendering import colors
 
 class BoardController:
+    """
+    Class responsible for bridging game board state, GUI and board graphics.
+    """
     def __init__(
             self,
             event_relay: EventRelay,
             board_visual: GameBoardVisual,
             is_player1: bool = True
         ) -> None:
+        """
+        Args:
+            event_relay: event_relay object for event based communication
+            board_visual: Board visual object that handles game board rendering
+            is_player1: Is this board owned by PLAYER1(or in this case the user)
+        """
         self._event_relay = event_relay
         self._game_board: Board = None
         self._board_visual = board_visual

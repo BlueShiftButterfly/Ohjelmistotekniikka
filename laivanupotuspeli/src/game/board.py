@@ -3,7 +3,15 @@ from game.ship import Ship
 from game.ship_type import ShipType
 
 class Board:
+    """
+    Class representing the Battleship-game board. Contains list of ships and opponent guesses.
+    """
     def __init__(self, width: int, height: int):
+        """
+        Args:
+            width: Width of the board
+            height: Height of the board
+        """
         self._width = width
         self._height = height
         self.ships: dict[tuple[int, int], Ship] = {}

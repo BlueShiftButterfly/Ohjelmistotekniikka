@@ -2,7 +2,15 @@ import pygame
 from engine.rendering.abstract_display import AbstractDisplay
 
 class Display(AbstractDisplay):
+    """
+        pygame display wrapper class
+    """
     def __init__(self, screen_width: int, screen_height: int):
+        """
+        Args:
+            screen_width: Width of the application in pixels
+            screen_height: Height of the application in pixels
+        """
         self._surface: pygame.Surface = pygame.display.set_mode((screen_width, screen_height))
 
     @property

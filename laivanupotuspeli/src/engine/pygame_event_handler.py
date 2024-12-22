@@ -3,7 +3,14 @@ from engine.event_relay import EventRelay
 from engine.event import Event
 
 class PygameEventHandler:
+    """
+    Class responsible for handling pygame related events, such as input events.
+    """
     def __init__(self, event_relay: EventRelay):
+        """
+        Args:
+            event_relay: event_relay object for event based communication
+        """
         self._event_relay = event_relay
         self._event_relay.subscribe(self, PygameEventHandler.update, Event.ON_BEFORE_RENDER)
 

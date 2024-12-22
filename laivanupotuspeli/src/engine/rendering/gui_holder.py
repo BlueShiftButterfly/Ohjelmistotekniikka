@@ -4,7 +4,15 @@ from engine.event import Event
 from engine.event_relay import EventRelay
 
 class GUIHolder:
+    """
+    Game GUI submanager. Contains all different UI "scenes" that are switched between during runtime.
+    """
     def __init__(self, event_relay: EventRelay, manager) -> None:
+        """
+        Args:
+        event_relay: event_relay object for event based communication
+        manager: pygame_gui manager object
+        """
         self._event_relay = event_relay
         self._manager = manager
         self._scenes = {
@@ -145,6 +153,12 @@ class GUIHolder:
             self.disable_scene(sk)
 
     def process_events(self, events):
+        """
+        Make GUIHolder process pygame events.
+
+        Args:
+            events: list of pygame events
+        """
         for event in events:
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 self._process_event_ui(event)
@@ -165,11 +179,17 @@ class GUIHolder:
                     )
 
     def enable_scene(self, scene: str):
+        """
+        Enable a given GUI scene. An enabled scene is interactable and visible.
+        """
         for e in self._scenes[scene].values():
             e.enable()
             e.show()
 
     def disable_scene(self, scene: str):
+        """
+        Enable a given GUI scene. A disabled scene is invisible and not interactable.
+        """
         for e in self._scenes[scene].values():
             e.disable()
             e.hide()

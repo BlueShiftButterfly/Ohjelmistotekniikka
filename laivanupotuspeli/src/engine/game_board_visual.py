@@ -9,6 +9,9 @@ from engine.asset_loader import AssetLoader
 from engine.rendering.abstract_renderable import AbstractRenderable
 
 class GameBoardVisual(AbstractRenderable):
+    """
+    Class responsible for rendering the game board.
+    """
     def __init__(
             self,
             event_relay: EventRelay,
@@ -20,6 +23,17 @@ class GameBoardVisual(AbstractRenderable):
             cell_size: int,
             enabled: bool = True
         ):
+        """
+        Args:
+            event_relay: event_relay object for event based communication,
+            asset_loader: Asset loader object that contains references to game assets,
+            cells_x: Board width in cells,
+            cells_y: Board height in cells,
+            x: Board horirzontal position on screen,
+            y: Board vertical position on screen,
+            cell_size: Size of a single cell in pixels,
+            enabled: Does this start visible or not 
+        """
         self._event_relay = event_relay
         self._asset_loader = asset_loader
         self._height = cells_x * cell_size

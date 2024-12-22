@@ -8,7 +8,17 @@ SHIP_TYPES = {
 }
 
 class Ship:
+    """
+    Class representing a ship piece in a Battleship-game.
+    """
     def __init__(self, x: int, y: int, ship_type: ShipType, direction: Direction):
+        """
+        Args:
+            x: The ship's x-coordinate on the game board.
+            y: The ship's y-coordinate on the game board.
+            ship_type: Type of ship. Determines for example the size of the ship piece.
+            direction: Wether the ship is laying horizontally or vertically.
+        """
         self.x = x
         self.y = y
         self.ship_type = ship_type

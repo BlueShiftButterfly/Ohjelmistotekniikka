@@ -2,11 +2,17 @@ import pygame
 from game.direction import Direction
 
 class AssetLoader:
+    """
+    Class responsible for loading game assets like sprites.
+    """
     def __init__(self):
         self.ship_sprites = {}
         self.sprites = {}
 
     def load(self):
+        """
+        Loads all game assets and creates asset dictionaries.
+        """
         self.ship_sprites = {
             "2x1": 
             {

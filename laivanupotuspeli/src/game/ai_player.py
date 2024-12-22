@@ -8,7 +8,16 @@ from engine.event import Event
 from engine.event_relay import EventRelay
 
 class AIPlayer(AbstractPlayer):
+    """
+    Class responsible for opponent AI behaviour.
+    """
     def __init__(self, event_relay: EventRelay, is_player1: bool, game_controller: GameController):
+        """
+        Args:
+            event_relay: event_relay object for event based communication
+            is_player1: Is AI player1
+            game_controller: Game Controller object that controls the flow of the game
+        """
         self._event_relay = event_relay
         self._is_player1 = is_player1
         self._game_controller = game_controller

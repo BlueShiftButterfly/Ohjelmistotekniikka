@@ -8,12 +8,19 @@ from engine.asset_loader import AssetLoader
 from engine.rendering import colors
 
 class Renderer:
+    """Class responsible for game rendering. Renders renderable objects and calls update event every frame."""
     def __init__(
             self,
             event_relay: EventRelay,
             display: AbstractDisplay,
             render_clock: AbstractRenderClock
         ):
+        """
+        Args:
+            event_relay: event_relay object for event based communication
+            display: pygame display wrapper object
+            render_clock: pygame clock wrapper object
+        """
         self._do_rendering = True
         self._display = display
         self._render_clock = render_clock
@@ -25,6 +32,11 @@ class Renderer:
         self._delta: float = 0
 
     def add_renderable(self, renderable: AbstractRenderable):
+        """
+        Add given renderable object to render queue.
+        Args:
+            renderable: the object to add to the render queue
+        """
         self._renderables.append(renderable)
 
     @property
@@ -36,14 +48,11 @@ class Renderer:
         return self._display
 
     def start_loop(self):
+        """
+        Start the render loop.
+        """
         while self._do_rendering:
             self._render()
-
-    def unpause(self):
-        self._do_rendering = True
-
-    def pause(self):
-        self._do_rendering = False
 
     def _render(self):
         if self._do_rendering is False:

@@ -5,7 +5,16 @@ from engine.event_relay import EventRelay
 from engine.event import Event
 
 class Player(AbstractPlayer):
+    """
+    Class responsible for user behaviour and linking the game and UI.
+    """
     def __init__(self, event_relay: EventRelay, is_player1: bool, game_controller: GameController):
+        """
+        Args:
+            event_relay: event_relay object for event based communication
+            is_player1: Does this player go first?
+            game_controller: Game controller object responsible for the flow of the game.
+        """
         self._event_relay = event_relay
         self._is_player1 = is_player1
         self._game_controller = game_controller

@@ -4,7 +4,14 @@ from engine.event_relay import EventRelay
 from engine.event import Event
 
 class GameController:
+    """
+    Controller class that controls the flow of the game.
+    """
     def __init__(self, event_relay: EventRelay):
+        """
+        Args:
+            event_relay: event_relay object for event based communication
+        """
         self.event_relay = event_relay
         self.player1:AbstractPlayer = None
         self.player1_board: Board = None

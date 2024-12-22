@@ -5,7 +5,15 @@ from engine.event import Event
 from engine.rendering.gui_holder import GUIHolder
 
 class GUIRenderer:
+    """
+    Class responsible for GUI rendering in-game.
+    """
     def __init__(self, event_relay: EventRelay, display: AbstractDisplay):
+        """
+        Args:
+            event_relay: event_relay object for event based communication
+            display: pygame display wrapper object
+        """
         self._display = display
         self._event_relay = event_relay
 
