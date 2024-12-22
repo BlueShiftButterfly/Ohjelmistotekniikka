@@ -7,7 +7,7 @@ if __name__ == "__main__":
     e = Application(g.event_relay)
     user_board_visual = GameBoardVisual(
         g.event_relay,
-        e.renderer.asset_loader,
+        e.renderer._asset_loader,
         10,
         10,
         e.renderer.display.resolution[0]/2-320,
@@ -16,7 +16,7 @@ if __name__ == "__main__":
     )
     opponent_board_visual = GameBoardVisual(
         g.event_relay,
-        e.renderer.asset_loader,
+        e.renderer._asset_loader,
         10,
         10,
         e.renderer.display.resolution[0]/2-320,

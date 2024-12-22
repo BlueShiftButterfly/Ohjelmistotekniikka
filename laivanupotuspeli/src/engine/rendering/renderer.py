@@ -19,10 +19,10 @@ class Renderer:
         self._render_clock = render_clock
         self._event_relay = event_relay
         self._renderables: list[AbstractRenderable] = []
-        self.asset_loader = AssetLoader()
-        self.asset_loader.load()
-        self.gui_renderer = GUIRenderer(event_relay, self._display)
-        self.delta: float = 0
+        self._asset_loader = AssetLoader()
+        self._asset_loader.load()
+        self._gui_renderer = GUIRenderer(event_relay, self._display)
+        self._delta: float = 0
 
     def add_renderable(self, renderable: AbstractRenderable):
         self._renderables.append(renderable)
@@ -46,8 +46,8 @@ class Renderer:
             return
         self._display.surface.fill(colors.BLACK)
         self._event_relay.call(Event.ON_BEFORE_RENDER)
-        self.delta = self._render_clock.tick(60)/1000.0
-        self._event_relay.call(Event.ON_RENDER, self.delta)
+        self._delta = self._render_clock.tick(60)/1000.0
+        self._event_relay.call(Event.ON_RENDER, self._delta)
         for r in self._renderables:
             if r.enabled is False:
                 continue
