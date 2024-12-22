@@ -8,9 +8,9 @@ from game.ship_type import ShipType
 class Game:
     def __init__(self):
         self.event_relay = EventRelay()
-        self.game_controller = GameController(self.event_relay)
-        self.player1 = Player(self.event_relay, True, self.game_controller)
-        self.player2 = AIPlayer(self.event_relay, False, self.game_controller)
+        self._game_controller = GameController(self.event_relay)
+        self._player1 = Player(self.event_relay, True, self._game_controller)
+        self._player2 = AIPlayer(self.event_relay, False, self._game_controller)
 
     def start(self):
-        self.game_controller.start(self.player1, self.player2)
+        self._game_controller.start(self._player1, self._player2)

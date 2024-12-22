@@ -43,7 +43,7 @@ class BoardController:
 
     def set_board(self, board: Board):
         self._game_board = board
-        self._board_visual.board_ships = list(self._game_board.ships.values())
+        self._board_visual.board_ships = list(self._game_board._ships.values())
 
     def update(self, delta: float):
         if self._cooldown > 0:
@@ -90,7 +90,7 @@ class BoardController:
             if self._game_board.is_valid_ship_placement(preview_ship) is False:
                 return
             if self._game_board.add_ship(preview_ship):
-                self._board_visual.board_ships = list(self._game_board.ships.values())
+                self._board_visual.board_ships = list(self._game_board._ships.values())
         else:
             if self._can_place_guess is False:
                 return
@@ -108,7 +108,7 @@ class BoardController:
             return
         s_pos = self._board_visual.screen_to_grid_coords(pygame.mouse.get_pos())
         self._game_board.try_remove_ship_at_position(s_pos)
-        self._board_visual.board_ships = list(self._game_board.ships.values())
+        self._board_visual.board_ships = list(self._game_board._ships.values())
 
     def on_ship_rotate(self):
         if self._board_visual.enabled is False:
@@ -164,10 +164,10 @@ class BoardController:
 
     def on_update_board(self, board):
         self._game_board = board
-        self._board_visual.board_ships = list(self._game_board.ships.values())
+        self._board_visual.board_ships = list(self._game_board._ships.values())
         self._board_visual.hit_markers = []
         self._board_visual.miss_markers = []
-        for g in self._game_board.opponent_guesses.values():
+        for g in self._game_board._opponent_guesses.values():
             if g.hit_ship:
                 self._board_visual.hit_markers.append((g.x, g.y))
             else:

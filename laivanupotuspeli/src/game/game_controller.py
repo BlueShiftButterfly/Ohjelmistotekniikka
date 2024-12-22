@@ -32,7 +32,7 @@ class GameController:
     def set_player_guess(self, is_player1, coords):
         if is_player1:
             self.player2_board.add_guess(coords[0], coords[1])
-            if self.player2_board.opponent_guesses[coords].hit_ship:
+            if self.player2_board._opponent_guesses[coords].hit_ship:
                 print("PLAYER 1 HIT!")
                 if self.player2_board.has_unsunk_ships_left():
                     self.player1.request_guess(self.player2_board)
@@ -45,7 +45,7 @@ class GameController:
             self.event_relay.call(Event.UPDATE_PLAYER2_BOARD, self.player2_board)
         else:
             self.player1_board.add_guess(coords[0], coords[1])
-            if self.player1_board.opponent_guesses[coords].hit_ship:
+            if self.player1_board._opponent_guesses[coords].hit_ship:
                 print("PLAYER 2 HIT!")
                 if self.player1_board.has_unsunk_ships_left():
                     self.player2.request_guess(self.player1_board)
