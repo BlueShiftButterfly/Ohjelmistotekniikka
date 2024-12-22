@@ -14,5 +14,6 @@
 | 19.12. | 2    | Vaihdettu GUI-kirjasto ja lisää käyttöliittymän kehitystä  |
 | 20.12. | 1    | Vastustajan laudan grafiikan kehitystä |
 | 21.12. | 3    | Laivanupotuspelin kehitystä, ei grafiikkaa |
+| 22.12. | 6    | Laivanupotuspelin kehitystä, ei grafiikkaa |
 
-| yht    | 27   |  | 
+| yht    | 33   |  | 
