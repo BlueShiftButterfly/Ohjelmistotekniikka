@@ -30,7 +30,7 @@ if __name__ == "__main__":
     e.renderer.add_renderable(
         opponent_board_visual
     )
-    #opponent_board_visual.do_draw_ships = False
+    opponent_board_visual.do_draw_ships = False
     user_board_controller = BoardController(g.event_relay, user_board_visual)
     opponent_board_controller = BoardController(g.event_relay, opponent_board_visual, is_player1=False)
     g.start()
