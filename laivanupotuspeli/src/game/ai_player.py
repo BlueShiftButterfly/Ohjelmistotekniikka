@@ -14,6 +14,7 @@ class AIPlayer(AbstractPlayer):
         self.event_relay = event_relay
         self.is_player1 = is_player1
         self.game_controller = game_controller
+        self.cheat = False
         self.event_relay.subscribe(self, self.submit_guess, Event.ON_PLAYER2_SUBMIT_GUESS)
 
     def request_ships(self, board: Board):
@@ -26,12 +27,24 @@ class AIPlayer(AbstractPlayer):
         self.game_controller.set_player_ships(self.is_player1, board)
 
     def request_guess(self, board: Board):
+        remaining_guesses = []
+        for _x in range(10):
+            for _y in range(10):
+                remaining_guesses.append((_x, _y))
+        if self.cheat:
+            remaining_guesses = []
+            for s in board.ships.values():
+                remaining_guesses.extend(s.get_tiles_board_pos())
+        for g in board.opponent_guesses.keys():
+            remaining_guesses.remove(g)
+        #x = random.randint(0, 9)
+        #y = random.randint(0, 9)
+        chosen_coords = random.choice(remaining_guesses)
         
-        x = random.randint(0, 9)
-        y = random.randint(0, 9)
-        if board.is_valid_guess_position(x, y):
-            print(f"ai guessed {x} {y}")
-            self.event_relay.call(Event.PLAYER2_REQUEST_GUESS, (x, y))
+            
+        if board.is_valid_guess_position(chosen_coords[0], chosen_coords[1]):
+            print(f"ai guessed {chosen_coords}")
+            self.event_relay.call(Event.PLAYER2_REQUEST_GUESS, chosen_coords)
             #self.game_controller.set_player_guess(self.is_player1, (x, y))
         else:
             self.request_guess(board)

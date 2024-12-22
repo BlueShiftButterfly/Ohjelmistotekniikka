@@ -1,3 +1,4 @@
+import random
 import pygame
 from game.ship import Ship, SHIP_TYPES
 from engine.event_relay import EventRelay
@@ -47,18 +48,23 @@ class BoardController:
 
     def update(self, delta: float):
         if self.cooldown > 0:
+            print(f"COOLDOWN {self.cooldown}")
+            print(self.ai_coords)
             self.cooldown -= 1
             if self.cooldown == 0 and self.ai_coords is not None:
+                print("P2 FAKE GUESS")
                 if self.game_board.would_hit_ship(self.ai_coords[0], self.ai_coords[1]):
                     self.board_visual.hit_markers.append(self.ai_coords)
                 else:
                     self.board_visual.miss_markers.append(self.ai_coords)
                 self.post_ai_cooldown = 60
         if self.post_ai_cooldown > 0:
+            print(f"POST AI COOLDOWN {self.post_ai_cooldown}")
             self.post_ai_cooldown -= 1
             if self.post_ai_cooldown == 0:
+                print("P2 CONFIRM GUESS")
+                #self.ai_coords = None
                 self.event_relay.call(Event.ON_PLAYER2_SUBMIT_GUESS, self.ai_coords)
-                self.ai_coords = None
         if self.board_visual.enabled is False:
             return
         if self.is_player1 is True:
@@ -146,6 +152,7 @@ class BoardController:
             self.can_place_guess = True
 
     def on_player2_guess(self, coords):
+        print("P2 GUESS")
         if self.is_player1:
             #self.cooldown = 60
             self.board_visual.enabled = True
@@ -154,10 +161,15 @@ class BoardController:
 
     def on_player2_request_guess(self, coords):
         
+        self.cooldown = 0
+        self.post_ai_cooldown = 0
+        self.ai_coords = None
         if self.is_player1:
-            self.cooldown = 60
+            print(f"BOARD REQUEST P2 GUESS {coords}")
+            self.cooldown = random.randint(20, 120)
             self.board_visual.enabled = True
             self.ai_coords = coords
+            print(f"AI COORDS {self.ai_coords}")
         else:
             self.board_visual.enabled = False
 
