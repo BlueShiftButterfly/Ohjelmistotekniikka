@@ -5,7 +5,9 @@
 
 Sovelluksen tarkoitus on mahdollistaa käyttäjän pelata klassista laivanupotuspeliä. Pelin alussa pelaaja voi asettaa aluksensa pelikentälle, jonka jälkeen vuoroittain pelaaja ja vastustaja voivat hyökätä toistensa aluksia vastaan.
 
-## Pelin perusominaisuudet
+## Pelin toteutuneet ominaisuudet
+
+### Pelin perusominaisuudet
 
  - Pelin alussa 
     - [x] Pelaaja voi asetella alukset haluamallaan tavalla
@@ -25,7 +27,7 @@ Sovelluksen tarkoitus on mahdollistaa käyttäjän pelata klassista laivanupotus
     - [x] Kun pelaaja tai tekoäly voittaa, tulee tieto siitä pelaajalle
 
 
-## Jatkokehitettävät toiminnallisuudet
+### Jatkokehitettävät toiminnallisuudet
  
  - [ ] Tekoäly on älykkäämpi ja muistaa mihin se on aikaisemmin osunut, sekä mitä aluksia pelaajalla on jäljellä
  - [ ] Pelillä on päävalikko, jossa pelaaja voi muuttaa asetuksia tai lopettaa pelin/sovelluksen suorituksen
