@@ -12,7 +12,7 @@ Ennen käynnistämistä on riippuvuudet asennettava seuraavalla komennolla:
 poetry install
 ```
 
-### Ohjelman käynnistäminen
+### Käynnistäminen
 
 Sovelluksen käynnistyy komennolla:
 
