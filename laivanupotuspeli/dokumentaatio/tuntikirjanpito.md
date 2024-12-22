@@ -11,4 +11,8 @@
 | 10.12. | 3    | Lisätty pelin toiminnallisuuteen liittyviä luokkia. Kehitetty renderöintiä ja UI:ta |
 | 17.12. | 2    | Lisätty aluksen lisäykseen liittyviä grafiikoita ja ominaisuuksia |
 | 18.12. | 2    | Pelin ja käyttöliittymän sisäistä koodin kehitystä  |
-| yht    | 21   |  | 
+| 19.12. | 2    | Vaihdettu GUI-kirjasto ja lisää käyttöliittymän kehitystä  |
+| 20.12. | 1    | Vastustajan laudan grafiikan kehitystä |
+| 21.12. | 3    | Laivanupotuspelin kehitystä, ei grafiikkaa |
+
+| yht    | 27   |  | 
