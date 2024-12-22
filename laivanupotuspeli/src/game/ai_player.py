@@ -1,3 +1,4 @@
+import random
 from game.board import Board
 from game.player_game_phase import PlayerPhase
 from engine.event_relay import EventRelay
@@ -8,7 +9,7 @@ from game.game_controller import GameController
 from game.ship import Ship, SHIP_TYPES
 from game.direction import Direction
 
-class Player(AbstractPlayer):
+class AIPlayer(AbstractPlayer):
     def __init__(self, event_relay: EventRelay, is_player1: bool, game_controller: GameController):
         self.event_relay = event_relay
         self.is_player1 = is_player1
@@ -19,13 +20,15 @@ class Player(AbstractPlayer):
         board.add_ship(Ship(2,8, SHIP_TYPES["3x1"], Direction.VERTICAL))
         board.add_ship(Ship(3,8, SHIP_TYPES["3x1"], Direction.VERTICAL))
         board.add_ship(Ship(4,8, SHIP_TYPES["4x1"], Direction.VERTICAL))
-        input("press enter to continue player ship placing phase")
+        print("AI placed ships")
         self.game_controller.set_player_ships(self.is_player1, board)
 
     def request_guess(self, board: Board):
-        x = int(input("enter x coordinate for guess: "))
-        y = int(input("enter y coordinate for guess: "))
+        x = random.randint(0, 9)
+        y = random.randint(0, 9)
         if board.is_valid_guess_position(x, y):
-            print(f"you guessed {x} {y}")
+            print(f"ai guessed {x} {y}")
             self.game_controller.set_player_guess(self.is_player1, (x, y))
+        else:
+            self.request_guess(self, board)
 

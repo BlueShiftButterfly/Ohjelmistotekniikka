@@ -1,6 +1,5 @@
 import pygame
-from game.game import SHIP_TYPES
-from game.ship import Ship
+from game.ship import Ship, SHIP_TYPES
 from engine.event_relay import EventRelay
 from engine.event import Event
 from game.board import Board

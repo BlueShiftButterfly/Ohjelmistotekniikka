@@ -1,6 +1,12 @@
 from game.ship_type import ShipType
 from game.direction import Direction
 
+SHIP_TYPES = {
+    "2x1": ShipType([(0, 0), (1, 0)], [(0, 0), (0, -1)], "2x1"),
+    "3x1": ShipType([(0, 0), (1, 0), (2, 0)], [(0, 0), (0, -1), (0, -2)], "3x1"),
+    "4x1": ShipType([(0, 0), (1, 0), (2, 0), (3, 0)], [(0, 0), (0, -1), (0, -2), (0, -3)], "4x1"),
+}
+
 class Ship:
     def __init__(self, x: int, y: int, ship_type: ShipType, direction: Direction):
         self.x = x
@@ -17,17 +23,11 @@ class Ship:
             real_tiles.append(real_tile)
         return real_tiles
 
-    def do_coords_overlap(self, coordinates: tuple[int, int]) -> bool:
-        for tile in self.get_tiles_board_pos():
-            if coordinates[0] == tile[0] + self.x and coordinates[1] == tile[1] + self.y:
-                return True
-        return False
-
     @property
     def hit_tiles_count(self) -> int:
         return self._hit_tiles_count
 
     def incerement_hit_count(self):
         self._hit_tiles_count += 1
-        if self.hit_tiles_count >= len(self.ship_type.get_tiles()):
+        if self.hit_tiles_count >= len(self.ship_type.get_tiles(self.direction)):
             self.is_sunk = True

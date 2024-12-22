@@ -3,10 +3,9 @@ import pygame
 from engine.rendering import colors as COLORS
 from engine.event_relay import EventRelay
 from engine.event import Event
-from game.ship import Ship
+from game.ship import Ship, SHIP_TYPES
 from game.direction import Direction
 from engine.asset_loader import AssetLoader
-from game.game import SHIP_TYPES
 from engine.rendering.abstract_renderable import AbstractRenderable
 
 class GameBoardVisual(AbstractRenderable):

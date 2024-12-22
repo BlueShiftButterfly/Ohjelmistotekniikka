@@ -27,11 +27,20 @@ class Board:
         if guess_coords in self.opponent_guesses:
             return False
         hit_ship = False
-        for ship in self.ships.values():
-            if ship.do_coords_overlap(guess_coords):
-                hit_ship = True
-                ship.incerement_hit_count()
+        for k, ship in self.ships.items():
+            for c in ship.get_tiles_board_pos():
+                if c == (x, y):
+                    hit_ship = True
+                    ship.incerement_hit_count()
         self.opponent_guesses[guess_coords] = Guess(x, y, hit_ship)
+        return True
+
+    def is_valid_guess_position(self, x: int, y: int) -> bool:
+        guess_coords = (x, y)
+        if self.are_coords_within_bounds(guess_coords) is False:
+            return False
+        if guess_coords in self.opponent_guesses:
+            return False
         return True
 
     def add_ship(self, ship: Ship) -> bool:
@@ -79,3 +88,10 @@ class Board:
         if ship_type is None:
             return False
         return self.ships_left_to_place[ship_type.name] > 0
+
+    def has_unsunk_ships_left(self) -> bool:
+        has_unsunk = False
+        for s in self.ships.values():
+            if s.is_sunk is False:
+                has_unsunk = True
+        return has_unsunk

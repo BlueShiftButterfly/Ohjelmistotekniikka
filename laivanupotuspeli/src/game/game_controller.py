@@ -1,28 +1,53 @@
-from game.player import Player
+from game.abstract_player import AbstractPlayer
 from engine.event_relay import EventRelay
 from engine.event import Event
 from game.player_game_phase import PlayerPhase
+from game.board import Board
 
 class GameController:
-    def __init__(self, player1: Player, player2: Player, event_relay: EventRelay):
+    def __init__(self, event_relay: EventRelay):
+        self.player1:AbstractPlayer = None
+        self.player1_board: Board = None
+        self.player2:AbstractPlayer = None
+        self.player2_board: Board = None
+
+    def start(self, player1:AbstractPlayer, player2:AbstractPlayer):
         self.player1 = player1
         self.player2 = player2
-        self.game_event_relay = event_relay
-        self.game_event_relay.subscribe(self, self.on_player_finish_ship_placement, Event.PLAYER1_FINISHED_PLACING_SHIPS)
-        self.game_event_relay.subscribe(self, self.on_player_finish_ship_placement, Event.PLAYER2_FINISHED_PLACING_SHIPS)
+        self.player1.request_ships(Board(10, 10))
+        self.player2.request_ships(Board(10, 10))
 
-    def begin_ship_placement_phase(self):
-        self.game_event_relay.call(Event.ROUND_START_SHIP_PLACEMENT)
-
-    def on_player_finish_ship_placement(self):
-        if (
-            self.player1.current_phase == PlayerPhase.WAITING_FOR_GUESS_BEGIN# and
-            #self.player2.current_phase == PlayerPhase.WAITING_FOR_GUESS_BEGIN
-        ):
-            self.start_player_turn(True)
-
-    def start_player_turn(self, is_player1_turn: bool):
-        if is_player1_turn:
-            self.game_event_relay.call(Event.PLAYER1_START_GUESS)
+    def set_player_ships(self, is_player1, board):
+        if is_player1:
+            self.player1_board = board
         else:
-            self.game_event_relay.call(Event.PLAYER2_START_GUESS)
+            self.player2_board = board
+        if self.player1_board is not None and self.player2_board is not None:
+            #for s in self.player2_board.ships.values():
+            #    s._hit_tiles_count = 100
+            #    s.is_sunk = True
+            self.player1.request_guess(self.player2_board)
+
+    def set_player_guess(self, is_player1, coords):
+        if is_player1:
+            self.player2_board.add_guess(coords[0], coords[1])
+            if self.player2_board.opponent_guesses[coords].hit_ship:
+                print("HIT!")
+                if self.player2_board.has_unsunk_ships_left():
+                    self.player1.request_guess(self.player2_board)
+                else:
+                    print("PLAYER 1 WINS!!!")
+            else:
+                print("MISS!")
+                self.player2.request_guess(self.player1_board)
+        else:
+            self.player1_board.add_guess(coords[0], coords[1])
+            if self.player1_board.opponent_guesses[coords].hit_ship:
+                print("HIT!")
+                if self.player1_board.has_unsunk_ships_left():
+                    self.player2.request_guess(self.player1_board)
+                else:
+                    print("PLAYER 2 WINS!!!")
+            else:
+                print("MISS!")
+                self.player1.request_guess(self.player2_board)
