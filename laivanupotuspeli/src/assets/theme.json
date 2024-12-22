@@ -1,0 +1,37 @@
+{
+    "label": {
+        "font":
+        {
+
+
+            "size": "24"
+
+        }
+    },
+    "#win_text":
+     {
+        "colours":
+        {
+            "dark_bg": "#1E1E1E"
+        },
+        "font":
+        {
+            "size": "48"
+
+        },
+        "prototype": "#new_shape_style"
+    },
+    "#lose_text":
+     {
+        "colours":
+        {
+            "dark_bg": "#440D0D"
+        },
+        "font":
+        {
+            "size": "48"
+
+        },
+        "prototype": "#new_shape_style"
+    }
+}

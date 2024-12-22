@@ -10,13 +10,14 @@ class Application:
     def __init__(self, event_relay: EventRelay):
         self.init_pygame()
         self.event_relay = event_relay
-        self.renderer = Renderer(self.event_relay, Display(1280, 720), RenderClock())
+        self.renderer = Renderer(self.event_relay, Display(1280, 900), RenderClock())
         self.pg_event_handler = PygameEventHandler(self.event_relay)
         self.event_relay.subscribe(self, Application.quit, Event.ON_APPLICATION_QUIT)
+        self.renderer.display.caption = "Battleship"
 
     def start(self):
         self.renderer.start_loop()
-
+        
     def init_pygame(self):
         pygame.init()
 

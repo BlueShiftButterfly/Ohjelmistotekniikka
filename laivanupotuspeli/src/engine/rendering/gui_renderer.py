@@ -11,7 +11,7 @@ class GUIRenderer:
         self.event_relay = event_relay
 
         self.pygame_events = None
-        self.manager = pygame_gui.UIManager(self.display.resolution)
+        self.manager = pygame_gui.UIManager(self.display.resolution, "src/assets/theme.json")
         self.ui_holder = GUI_Holder(self.event_relay, self.manager)
 
         self.event_relay.subscribe(self, self.get_events, Event.ON_PYGAME_EVENTS_UPDATE)

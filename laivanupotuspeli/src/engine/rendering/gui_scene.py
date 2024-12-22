@@ -18,108 +18,110 @@ class GUI_Holder:
                 ),
 
                 "2x1": pygame_gui.elements.UIButton(
-                    relative_rect=pygame.Rect((-300, 100), (100, 50)),
+                    relative_rect=pygame.Rect((-300, 100), (200, 50)),
                     text="2x1",
                     manager=self.manager,
                     anchors={"right": "right","top": "top"}
                 ),
 
                 "3x1": pygame_gui.elements.UIButton(
-                    relative_rect=pygame.Rect((-300, 150), (100, 50)),
+                    relative_rect=pygame.Rect((-300, 150), (200, 50)),
                     text="3x1",
                     manager=self.manager,
                     anchors={"right": "right","top": "top"}
                 ),
 
                 "4x1": pygame_gui.elements.UIButton(
-                    relative_rect=pygame.Rect((-300, 200), (100, 50)),
+                    relative_rect=pygame.Rect((-300, 200), (200, 50)),
                     text="4x1",
                     manager=self.manager,
                     anchors={"right": "right","top": "top"}
                 ),
                 "board_owner_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((0, -340), (300, 50)),
+                    relative_rect=pygame.Rect((0, -340), (600, 50)),
                     text="Currently viewing your game board",
                     manager=self.manager,
                     anchors={"center": "center","top": "top"}
                 ),
                 "task_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((-400, 50), (300, 50)),
-                    text="Place your ships",
+                    relative_rect=pygame.Rect((0, -400), (600, 50)),
+                    text="""Place your ships ([R] to rotate ship)""",
                     manager=self.manager,
-                    anchors={"right": "right","top": "top"}
+                    anchors={"center": "center","top": "top"}
                 )
             },
             "user_guess":
             {
                 "board_owner_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((0, -340), (300, 50)),
+                    relative_rect=pygame.Rect((0, -340), (600, 50)),
                     text="Currently viewing the opponent's board",
                     manager=self.manager,
                     anchors={"center": "center","top": "top"}
                 ),
                 "task_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((-400, 50), (300, 50)),
-                    text="Fire a shot at a tile on the opponent's board",
+                    relative_rect=pygame.Rect((0, -400), (900, 50)),
+                    text="Fire a shot at a tile on the opponent's board (Left click to shoot at tile)",
                     manager=self.manager,
-                    anchors={"right": "right","top": "top"}
+                    anchors={"center": "center","top": "top"}
                 )
             },
             "opponent_guess":
             {
                 "board_owner_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((0, -340), (300, 50)),
+                    relative_rect=pygame.Rect((0, -340), (600, 50)),
                     text="Currently viewing your game board",
                     manager=self.manager,
                     anchors={"center": "center","top": "top"}
                 ),
                 "task_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((-400, 50), (300, 50)),
+                    relative_rect=pygame.Rect((0, -400), (600, 50)),
                     text="The opponent is guessing",
                     manager=self.manager,
-                    anchors={"right": "right","top": "top"}
+                    anchors={"center": "center","top": "top"}
                 )
             },
             "opponent_win":
             {
                 "board_owner_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((0, -340), (300, 50)),
+                    relative_rect=pygame.Rect((0, -340), (600, 50)),
                     text="Currently viewing your game board",
                     manager=self.manager,
                     anchors={"center": "center","top": "top"}
                 ),
                 "task_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((-400, 50), (300, 50)),
+                    relative_rect=pygame.Rect((0, -400), (600, 50)),
                     text="The opponent is guessing",
                     manager=self.manager,
-                    anchors={"right": "right","top": "top"}
+                    anchors={"center": "center","top": "top"}
                 ),
                 "win_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((0, 0), (300, 50)),
+                    relative_rect=pygame.Rect((0, 0), (600, 300)),
                     text="YOU LOSE!",
                     manager=self.manager,
-                    anchors={"center": "center","center": "center"}
+                    anchors={"center": "center","center": "center"},
+                    object_id=pygame_gui.core.ObjectID(object_id='#lose_text')
                 )
             },
             "user_win":
             {
                 "board_owner_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((0, -340), (300, 50)),
+                    relative_rect=pygame.Rect((0, -340), (600, 50)),
                     text="Currently viewing the opponent's board",
                     manager=self.manager,
                     anchors={"center": "center","top": "top"}
                 ),
                 "task_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((-400, 50), (300, 50)),
+                    relative_rect=pygame.Rect((0, -400), (600, 50)),
                     text="Fire a shot at a tile on the opponent's board",
                     manager=self.manager,
-                    anchors={"right": "right","top": "top"}
+                    anchors={"center": "center","top": "top"}
                 ),
                 "win_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((0, 0), (300, 50)),
+                    relative_rect=pygame.Rect((0, 0), (600, 300)),
                     text="YOU WIN!",
                     manager=self.manager,
-                    anchors={"center": "center","center": "center"}
+                    anchors={"center": "center","center": "center"},
+                    object_id=pygame_gui.core.ObjectID(object_id='#win_text')
                 )
             },
         }
