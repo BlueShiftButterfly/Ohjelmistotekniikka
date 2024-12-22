@@ -35,6 +35,15 @@ class Board:
         self.opponent_guesses[guess_coords] = Guess(x, y, hit_ship)
         return True
 
+    def would_hit_ship(self, x: int, y: int) -> bool:
+        if self.is_valid_guess_position(x, y) is False:
+            return False
+        for k, ship in self.ships.items():
+            for c in ship.get_tiles_board_pos():
+                if c == (x, y):
+                    return True
+        return False
+
     def is_valid_guess_position(self, x: int, y: int) -> bool:
         guess_coords = (x, y)
         if self.are_coords_within_bounds(guess_coords) is False:

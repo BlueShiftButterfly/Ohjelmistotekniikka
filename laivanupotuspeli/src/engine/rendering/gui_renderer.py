@@ -18,9 +18,11 @@ class GUIRenderer:
         self.event_relay.subscribe(self, self.update, Event.ON_RENDER)
         self.event_relay.subscribe(self, self.render_gui, Event.ON_AFTER_RENDER_BEFORE_DISPLAY)
         self.event_relay.subscribe(self, self.on_finish_placing_ships, Event.ON_USER_CONFIRM_SHIP_PLACEMENT)
-        self.event_relay.subscribe(self, self.on_user_turn, Event.PLAYER1_START_GUESS)
-        self.event_relay.subscribe(self, self.on_opponent_turn, Event.PLAYER2_START_GUESS)
-        self.start_placing_ships()
+        self.event_relay.subscribe(self, self.on_user_turn, Event.PLAYER1_REQUEST_GUESS)
+        self.event_relay.subscribe(self, self.on_opponent_turn, Event.PLAYER2_REQUEST_GUESS)
+        self.event_relay.subscribe(self, self.start_placing_ships, Event.PLAYER1_REQUEST_SHIP_PLACEMENT)
+        self.event_relay.subscribe(self, self.on_user_win, Event.ON_PLAYER1_WIN)
+        self.event_relay.subscribe(self, self.on_opponent_win, Event.ON_PLAYER2_WIN)
 
     def get_events(self, events):
         self.pygame_events = events
@@ -34,16 +36,26 @@ class GUIRenderer:
     def render_gui(self):
         self.manager.draw_ui(self.display.surface)
 
-    def start_placing_ships(self):
+    def start_placing_ships(self, board):
         self.ui_holder.enable_scene("ship_placement")
 
-    def on_finish_placing_ships(self):
+    def on_finish_placing_ships(self, board):
         self.ui_holder.disable_scene("ship_placement")
 
     def on_user_turn(self):
         self.ui_holder.enable_scene("user_guess")
         self.ui_holder.disable_scene("opponent_guess")
 
-    def on_opponent_turn(self):
+    def on_opponent_turn(self, coords):
         self.ui_holder.enable_scene("opponent_guess")
         self.ui_holder.disable_scene("user_guess")
+
+    def on_user_win(self):
+        self.ui_holder.disable_scene("user_guess")
+        self.ui_holder.disable_scene("opponent_guess")
+        self.ui_holder.enable_scene("user_win")
+
+    def on_opponent_win(self):
+        self.ui_holder.disable_scene("user_guess")
+        self.ui_holder.disable_scene("opponent_guess")
+        self.ui_holder.enable_scene("opponent_win")

@@ -22,11 +22,15 @@ class GameBoardVisual(AbstractRenderable):
         self.board_surface = pygame.Surface((self.width, self.height))
 
         self.bg_sprite = self.scale_sprite_to_cell_size(self.asset_loader.sprites["sea_bg"])
-        self.marker_sprite = self.scale_sprite_to_cell_size(self.asset_loader.sprites["red_marker"], True)
+        self.hit_marker_sprite = self.scale_sprite_to_cell_size(self.asset_loader.sprites["red_marker"], True)
+        self.miss_marker_sprite = self.scale_sprite_to_cell_size(self.asset_loader.sprites["miss_marker"], True)
         self.event_relay.subscribe(self, self.update, Event.ON_RENDER)
-        self.markers: list[tuple[int, int]] = []
+        self.hit_markers: list[tuple[int, int]] = []
+        self.miss_markers: list[tuple[int, int]] = []
         self.board_ships = []
         self.preview_ships = []
+
+        self.do_draw_ships = True
 
         self._enabled = enabled
 
@@ -51,9 +55,12 @@ class GameBoardVisual(AbstractRenderable):
                 2
             )
 
-    def render_markers(self, coordinates: list[tuple]):
+    def render_markers(self, coordinates: list[tuple], is_hit_marker = False):
+        s = self.hit_marker_sprite
+        if is_hit_marker is False:
+            s = self.miss_marker_sprite
         for coord in coordinates:
-            self.board_surface.blit(self.marker_sprite, (coord[0]*self.cell_size, coord[1]*self.cell_size))
+            self.board_surface.blit(s, (coord[0]*self.cell_size, coord[1]*self.cell_size))
 
     def highlight_square(self, coordinates: tuple[int, int], color: pygame.Color):
         if self.are_coordinates_within_bounds(coordinates) is False:
@@ -112,8 +119,11 @@ class GameBoardVisual(AbstractRenderable):
         if self._enabled is False:
             return
         self.render_background()
-        for s in self.board_ships:
-            self.draw_ship(s)
+        if self.do_draw_ships:
+            for s in self.board_ships:
+                self.draw_ship(s)
+        self.render_markers(self.hit_markers, True)
+        self.render_markers(self.miss_markers, False)
 
     @property
     def enabled(self) -> bool:

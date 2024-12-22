@@ -35,5 +35,6 @@ class AssetLoader:
         }
         self.sprites = {
             "sea_bg": pygame.image.load("src/assets/sea_bg.png").convert(),
-            "red_marker": pygame.image.load("src/assets/indicator1.png").convert_alpha()
+            "red_marker": pygame.image.load("src/assets/indicator1.png").convert_alpha(),
+            "miss_marker": pygame.image.load("src/assets/indicator2.png").convert_alpha()
         }

@@ -80,11 +80,53 @@ class GUI_Holder:
                     anchors={"right": "right","top": "top"}
                 )
             },
+            "opponent_win":
+            {
+                "board_owner_text": pygame_gui.elements.UILabel(
+                    relative_rect=pygame.Rect((0, -340), (300, 50)),
+                    text="Currently viewing your game board",
+                    manager=self.manager,
+                    anchors={"center": "center","top": "top"}
+                ),
+                "task_text": pygame_gui.elements.UILabel(
+                    relative_rect=pygame.Rect((-400, 50), (300, 50)),
+                    text="The opponent is guessing",
+                    manager=self.manager,
+                    anchors={"right": "right","top": "top"}
+                ),
+                "win_text": pygame_gui.elements.UILabel(
+                    relative_rect=pygame.Rect((0, 0), (300, 50)),
+                    text="YOU LOSE!",
+                    manager=self.manager,
+                    anchors={"center": "center","center": "center"}
+                )
+            },
+            "user_win":
+            {
+                "board_owner_text": pygame_gui.elements.UILabel(
+                    relative_rect=pygame.Rect((0, -340), (300, 50)),
+                    text="Currently viewing the opponent's board",
+                    manager=self.manager,
+                    anchors={"center": "center","top": "top"}
+                ),
+                "task_text": pygame_gui.elements.UILabel(
+                    relative_rect=pygame.Rect((-400, 50), (300, 50)),
+                    text="Fire a shot at a tile on the opponent's board",
+                    manager=self.manager,
+                    anchors={"right": "right","top": "top"}
+                ),
+                "win_text": pygame_gui.elements.UILabel(
+                    relative_rect=pygame.Rect((0, 0), (300, 50)),
+                    text="YOU WIN!",
+                    manager=self.manager,
+                    anchors={"center": "center","center": "center"}
+                )
+            },
         }
         self.ui_events = {
             "ship_placement":
             {
-                "ship_placement_button": (Event.ON_USER_CONFIRM_SHIP_PLACEMENT, None),
+                "ship_placement_button": (Event.ON_CONFIRM_SHIP_BUTTON, None),
 
                 "2x1": (Event.ON_SELECT_SHIP_TYPE, "2x1"),
 
