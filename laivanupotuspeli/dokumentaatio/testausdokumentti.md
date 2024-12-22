@@ -1,6 +1,0 @@
-# Testausdokumentti
-
-## Testikattavuus
-
-TODO
-
