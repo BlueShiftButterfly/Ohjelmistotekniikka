@@ -22,5 +22,5 @@ class Application:
         pygame.init()
 
     def quit(self):
-        self.renderer.pause()
+        #self.renderer.pause()
         pygame.quit()

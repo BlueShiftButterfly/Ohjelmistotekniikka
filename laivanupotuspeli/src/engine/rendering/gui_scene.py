@@ -38,14 +38,14 @@ class GUI_Holder:
                     anchors={"right": "right","top": "top"}
                 ),
                 "board_owner_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((0, -340), (600, 50)),
+                    relative_rect=pygame.Rect((0, -340), (600, 32)),
                     text="Currently viewing your game board",
                     manager=self.manager,
                     anchors={"center": "center","top": "top"}
                 ),
                 "task_text": pygame_gui.elements.UILabel(
-                    relative_rect=pygame.Rect((0, -400), (600, 50)),
-                    text="""Place your ships ([R] to rotate ship)""",
+                    relative_rect=pygame.Rect((0, -400), (900, 600)),
+                    text="""Place your ships ([R] to rotate ship, [Right Click] to place, [Left click] to remove)""",
                     manager=self.manager,
                     anchors={"center": "center","top": "top"}
                 )
