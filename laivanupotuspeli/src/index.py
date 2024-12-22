@@ -4,6 +4,7 @@ from engine.game_board_visual import GameBoardVisual
 from engine.board_controller import BoardController
 if __name__ == "__main__":
     g = Game()
+    g.start()
     #e = Application(g.event_relay)
     #user_board_visual = GameBoardVisual(
     #    g.event_relay,

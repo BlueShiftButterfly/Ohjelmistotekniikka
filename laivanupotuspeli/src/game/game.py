@@ -11,4 +11,6 @@ class Game:
         self.game_controller = GameController(self.event_relay)
         self.player1 = Player(self.event_relay, True, self.game_controller)
         self.player2 = AIPlayer(self.event_relay, False, self.game_controller)
+
+    def start(self):
         self.game_controller.start(self.player1, self.player2)
