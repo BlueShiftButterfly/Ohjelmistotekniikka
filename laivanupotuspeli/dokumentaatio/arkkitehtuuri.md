@@ -56,9 +56,3 @@ kuten mihin tietynlaisen aluksen voi asettaa.
 
 
 `ShipType`-luokka sisältää tietoa yhdestä alustyypistä, kuten minkä muotoinen alus on.
-
-## Pelimoottori
-
-
-TODO
-
