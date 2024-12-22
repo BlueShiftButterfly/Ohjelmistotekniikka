@@ -17,10 +17,9 @@ class Application:
 
     def start(self):
         self.renderer.start_loop()
-        
+
     def init_pygame(self):
         pygame.init()
 
     def quit(self):
-        #self.renderer.pause()
         pygame.quit()

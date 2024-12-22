@@ -1,9 +1,8 @@
-import pygame
 import pygame_gui
 from engine.rendering.abstract_display import AbstractDisplay
 from engine.event_relay import EventRelay
 from engine.event import Event
-from engine.rendering.gui_scene import GUI_Holder
+from engine.rendering.gui_holder import GUIHolder
 
 class GUIRenderer:
     def __init__(self, event_relay: EventRelay, display: AbstractDisplay):
@@ -12,15 +11,15 @@ class GUIRenderer:
 
         self._pygame_events = None
         self._manager = pygame_gui.UIManager(self._display.resolution, "src/assets/theme.json")
-        self._ui_holder = GUI_Holder(self._event_relay, self._manager)
+        self._ui_holder = GUIHolder(self._event_relay, self._manager)
 
         self._event_relay.subscribe(self, self.get_events, Event.ON_PYGAME_EVENTS_UPDATE)
         self._event_relay.subscribe(self, self.update, Event.ON_RENDER)
         self._event_relay.subscribe(self, self.render_gui, Event.ON_AFTER_RENDER_BEFORE_DISPLAY)
-        self._event_relay.subscribe(self, self.on_finish_placing_ships, Event.ON_USER_CONFIRM_SHIP_PLACEMENT)
+        self._event_relay.subscribe(self, self.on_done_placing, Event.ON_USER_CONFIRM_PLACEMENT)
         self._event_relay.subscribe(self, self.on_user_turn, Event.PLAYER1_REQUEST_GUESS)
         self._event_relay.subscribe(self, self.on_opponent_turn, Event.PLAYER2_REQUEST_GUESS)
-        self._event_relay.subscribe(self, self.start_placing_ships, Event.PLAYER1_REQUEST_SHIP_PLACEMENT)
+        self._event_relay.subscribe(self, self.start_placing, Event.PLAYER1_REQUEST_SHIP_PLACEMENT)
         self._event_relay.subscribe(self, self.on_user_win, Event.ON_PLAYER1_WIN)
         self._event_relay.subscribe(self, self.on_opponent_win, Event.ON_PLAYER2_WIN)
 
@@ -36,10 +35,10 @@ class GUIRenderer:
     def render_gui(self):
         self._manager.draw_ui(self._display.surface)
 
-    def start_placing_ships(self, board):
+    def start_placing(self, board):
         self._ui_holder.enable_scene("ship_placement")
 
-    def on_finish_placing_ships(self, board):
+    def on_done_placing(self, board):
         self._ui_holder.disable_scene("ship_placement")
 
     def on_user_turn(self):

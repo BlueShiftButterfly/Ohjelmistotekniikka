@@ -3,7 +3,7 @@ import pygame_gui
 from engine.event import Event
 from engine.event_relay import EventRelay
 
-class GUI_Holder:
+class GUIHolder:
     def __init__(self, event_relay: EventRelay, manager) -> None:
         self._event_relay = event_relay
         self._manager = manager
@@ -45,7 +45,8 @@ class GUI_Holder:
                 ),
                 "task_text": pygame_gui.elements.UILabel(
                     relative_rect=pygame.Rect((0, -400), (900, 600)),
-                    text="""Place your ships ([R] to rotate ship, [Right Click] to place, [Left click] to remove)""",
+                    text=
+"""Place your ships ([R] to rotate ship, [Right Click] to place, [Left click] to remove)""",
                     manager=self._manager,
                     anchors={"center": "center","top": "top"}
                 )
@@ -60,7 +61,8 @@ class GUI_Holder:
                 ),
                 "task_text": pygame_gui.elements.UILabel(
                     relative_rect=pygame.Rect((0, -400), (900, 50)),
-                    text="Fire a shot at a tile on the opponent's board (Left click to shoot at tile)",
+                    text=
+"""Fire a shot at a tile on the opponent's board (Left click to shoot at tile)""",
                     manager=self._manager,
                     anchors={"center": "center","top": "top"}
                 )
@@ -98,7 +100,7 @@ class GUI_Holder:
                     relative_rect=pygame.Rect((0, 0), (600, 300)),
                     text="YOU LOSE!",
                     manager=self._manager,
-                    anchors={"center": "center","center": "center"},
+                    anchors={"center": "center"},
                     object_id=pygame_gui.core.ObjectID(object_id='#lose_text')
                 )
             },
@@ -120,7 +122,7 @@ class GUI_Holder:
                     relative_rect=pygame.Rect((0, 0), (600, 300)),
                     text="YOU WIN!",
                     manager=self._manager,
-                    anchors={"center": "center","center": "center"},
+                    anchors={"center": "center"},
                     object_id=pygame_gui.core.ObjectID(object_id='#win_text')
                 )
             },
@@ -145,13 +147,22 @@ class GUI_Holder:
     def process_events(self, events):
         for event in events:
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
-                for sk, sv in self._scenes.items():
-                    for k, v in sv.items():
-                        if event.ui_element == v:
-                            if self._ui_events[sk][k][1] is None:
-                                self._event_relay.call(self._ui_events[sk][k][0])
-                            else:
-                                self._event_relay.call(self._ui_events[sk][k][0], self._ui_events[sk][k][1])
+                self._process_event_ui(event)
+
+    def _process_event_ui(self, event):
+        for sk, sv in self._scenes.items():
+            for k, v in sv.items():
+                if event.ui_element != v:
+                    continue
+                if self._ui_events[sk][k][1] is None:
+                    self._event_relay.call(
+                        self._ui_events[sk][k][0]
+                    )
+                else:
+                    self._event_relay.call(
+                        self._ui_events[sk][k][0],
+                        self._ui_events[sk][k][1]
+                    )
 
     def enable_scene(self, scene: str):
         for e in self._scenes[scene].values():

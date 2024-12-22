@@ -1,15 +1,20 @@
 import random
 import pygame
 from game.ship import Ship, SHIP_TYPES
+from game.board import Board
+from game.direction import Direction
 from engine.event_relay import EventRelay
 from engine.event import Event
-from game.board import Board
 from engine.game_board_visual import GameBoardVisual
-from game.direction import Direction
 from engine.rendering import colors
 
 class BoardController:
-    def __init__(self, event_relay: EventRelay, board_visual: GameBoardVisual, is_player1: bool = True) -> None:
+    def __init__(
+            self,
+            event_relay: EventRelay,
+            board_visual: GameBoardVisual,
+            is_player1: bool = True
+        ) -> None:
         self._event_relay = event_relay
         self._game_board: Board = None
         self._board_visual = board_visual
@@ -18,21 +23,69 @@ class BoardController:
         self._is_placing_ships = False
         self._is_player1 = is_player1
         self._can_place_guess = False
-        self._event_relay.subscribe(self, self.update, Event.ON_RENDER)
-        self._event_relay.subscribe(self, self.on_left_click, Event.ON_MOUSE0_PRESS)
-        self._event_relay.subscribe(self, self.on_right_click, Event.ON_MOUSE1_PRESS)
-        self._event_relay.subscribe(self, self.on_user_request_guess, Event.PLAYER1_REQUEST_GUESS)
-        self._event_relay.subscribe(self, self.on_player2_request_guess, Event.PLAYER2_REQUEST_GUESS)
+        self._event_relay.subscribe(
+            self,
+            self.update,
+            Event.ON_RENDER
+        )
+        self._event_relay.subscribe(
+            self,
+            self.on_left_click,
+            Event.ON_MOUSE0_PRESS
+        )
+        self._event_relay.subscribe(
+            self,
+            self.on_right_click,
+            Event.ON_MOUSE1_PRESS
+        )
+        self._event_relay.subscribe(
+            self,
+            self.on_user_request_guess,
+            Event.PLAYER1_REQUEST_GUESS
+        )
+        self._event_relay.subscribe(
+            self,
+            self.on_player2_request_guess,
+            Event.PLAYER2_REQUEST_GUESS
+        )
         if is_player1:
-            self._event_relay.subscribe(self, self.on_ship_rotate, Event.ON_SHIP_ROTATE)
-            self._event_relay.subscribe(self, self.on_select_ship_type, Event.ON_SELECT_SHIP_TYPE)
-            self._event_relay.subscribe(self, self.on_confirm_placement, Event.ON_CONFIRM_SHIP_BUTTON)
-            self._event_relay.subscribe(self, self.on_request_ship_placement, Event.PLAYER1_REQUEST_SHIP_PLACEMENT)
-            self._event_relay.subscribe(self, self.on_update_board, Event.UPDATE_PLAYER1_BOARD)
+            self._event_relay.subscribe(
+                self,
+                self.on_ship_rotate,
+                Event.ON_SHIP_ROTATE
+                )
+            self._event_relay.subscribe(
+                self,
+                self.on_select_ship_type,
+                Event.ON_SELECT_SHIP_TYPE
+                )
+            self._event_relay.subscribe(
+                self,
+                self.on_confirm_placement,
+                Event.ON_CONFIRM_SHIP_BUTTON
+            )
+            self._event_relay.subscribe(
+                self,
+                self.on_request_ship_placement,
+                Event.PLAYER1_REQUEST_SHIP_PLACEMENT
+            )
+            self._event_relay.subscribe(
+                self,
+                self.on_update_board,
+                Event.UPDATE_PLAYER1_BOARD
+            )
         else:
-            self._event_relay.subscribe(self, self.set_board, Event.PLAYER2_FINISHED_PLACING_SHIPS)
-            self._event_relay.subscribe(self, self.on_update_board, Event.UPDATE_PLAYER2_BOARD)
-        
+            self._event_relay.subscribe(
+                self,
+                self.set_board,
+                Event.PLAYER2_FINISHED_PLACING_SHIPS
+            )
+            self._event_relay.subscribe(
+                self,
+                self.on_update_board,
+                Event.UPDATE_PLAYER2_BOARD
+            )
+
         self._cooldown = 0
         self._ai_coords = None
         self._post_ai_cooldown = 0
@@ -43,7 +96,7 @@ class BoardController:
 
     def set_board(self, board: Board):
         self._game_board = board
-        self._board_visual.board_ships = list(self._game_board._ships.values())
+        self._board_visual.board_ships = list(self._game_board.ships.values())
 
     def update(self, delta: float):
         if self._cooldown > 0:
@@ -67,9 +120,18 @@ class BoardController:
                 self._selected_ship_type = None
                 return
             s_pos = self._board_visual.screen_to_grid_coords(pygame.mouse.get_pos())
-            preview_ship = Ship(s_pos[0], s_pos[1], SHIP_TYPES[self._selected_ship_type], self._preview_ship_rotation)
+            preview_ship = Ship(
+                s_pos[0],
+                s_pos[1],
+                SHIP_TYPES[self._selected_ship_type],
+                self._preview_ship_rotation
+            )
             if self._game_board.is_valid_ship_placement(preview_ship) is True:
-                self._board_visual.draw_ship_preview(self._selected_ship_type, self._preview_ship_rotation, s_pos)
+                self._board_visual.draw_ship_preview(
+                    self._selected_ship_type,
+                    self._preview_ship_rotation,
+                    s_pos
+                )
         else:
             s_pos = self._board_visual.screen_to_grid_coords(pygame.mouse.get_pos())
             self._board_visual.highlight_square(s_pos, colors.WHITE)
@@ -86,11 +148,16 @@ class BoardController:
                 self._selected_ship_type = None
                 return
             s_pos = self._board_visual.screen_to_grid_coords(pygame.mouse.get_pos())
-            preview_ship = Ship(s_pos[0], s_pos[1], SHIP_TYPES[self._selected_ship_type], self._preview_ship_rotation)
+            preview_ship = Ship(
+                s_pos[0],
+                s_pos[1],
+                SHIP_TYPES[self._selected_ship_type],
+                self._preview_ship_rotation
+            )
             if self._game_board.is_valid_ship_placement(preview_ship) is False:
                 return
             if self._game_board.add_ship(preview_ship):
-                self._board_visual.board_ships = list(self._game_board._ships.values())
+                self._board_visual.board_ships = list(self._game_board.ships.values())
         else:
             if self._can_place_guess is False:
                 return
@@ -108,7 +175,7 @@ class BoardController:
             return
         s_pos = self._board_visual.screen_to_grid_coords(pygame.mouse.get_pos())
         self._game_board.try_remove_ship_at_position(s_pos)
-        self._board_visual.board_ships = list(self._game_board._ships.values())
+        self._board_visual.board_ships = list(self._game_board.ships.values())
 
     def on_ship_rotate(self):
         if self._board_visual.enabled is False:
@@ -118,7 +185,7 @@ class BoardController:
         if self._preview_ship_rotation == Direction.VERTICAL:
             self._preview_ship_rotation = Direction.HORIZONTAL
         else:
-            self._preview_ship_rotation = Direction.VERTICAL 
+            self._preview_ship_rotation = Direction.VERTICAL
 
     def on_select_ship_type(self, ship_type: str):
         if self._board_visual.enabled is False:
@@ -135,7 +202,7 @@ class BoardController:
         if self._game_board.placed_all_ships():
             self._selected_ship_type = None
             self._is_placing_ships = False
-            self._event_relay.call(Event.ON_USER_CONFIRM_SHIP_PLACEMENT, self._game_board)
+            self._event_relay.call(Event.ON_USER_CONFIRM_PLACEMENT, self._game_board)
 
     def on_user_request_guess(self):
         if self._is_player1:
@@ -151,7 +218,6 @@ class BoardController:
             self._board_visual.enabled = False
 
     def on_player2_request_guess(self, coords):
-        
         self._cooldown = 0
         self._post_ai_cooldown = 0
         self._ai_coords = None
@@ -164,10 +230,10 @@ class BoardController:
 
     def on_update_board(self, board):
         self._game_board = board
-        self._board_visual.board_ships = list(self._game_board._ships.values())
+        self._board_visual.board_ships = list(self._game_board.ships.values())
         self._board_visual.hit_markers = []
         self._board_visual.miss_markers = []
-        for g in self._game_board._opponent_guesses.values():
+        for g in self._game_board.opponent_guesses.values():
             if g.hit_ship:
                 self._board_visual.hit_markers.append((g.x, g.y))
             else:

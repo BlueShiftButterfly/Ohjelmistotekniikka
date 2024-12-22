@@ -28,6 +28,10 @@ class Renderer:
         self._renderables.append(renderable)
 
     @property
+    def asset_loader(self):
+        return self._asset_loader
+
+    @property
     def display(self):
         return self._display
 

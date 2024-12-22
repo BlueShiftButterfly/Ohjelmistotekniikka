@@ -1,15 +1,25 @@
 import math
 import pygame
+from game.ship import Ship, SHIP_TYPES
+from game.direction import Direction
 from engine.rendering import colors as COLORS
 from engine.event_relay import EventRelay
 from engine.event import Event
-from game.ship import Ship, SHIP_TYPES
-from game.direction import Direction
 from engine.asset_loader import AssetLoader
 from engine.rendering.abstract_renderable import AbstractRenderable
 
 class GameBoardVisual(AbstractRenderable):
-    def __init__(self, event_relay: EventRelay, asset_loader: AssetLoader, cells_x: int, cells_y: int, x: int, y: int, cell_size: int, enabled: bool = True):
+    def __init__(
+            self,
+            event_relay: EventRelay,
+            asset_loader: AssetLoader,
+            cells_x: int,
+            cells_y: int,
+            x: int,
+            y: int,
+            cell_size: int,
+            enabled: bool = True
+        ):
         self._event_relay = event_relay
         self._asset_loader = asset_loader
         self._height = cells_x * cell_size
@@ -21,9 +31,9 @@ class GameBoardVisual(AbstractRenderable):
         self._cell_size = cell_size
         self._board_surface = pygame.Surface((self._width, self._height))
 
-        self._bg_sprite = self.scale_sprite_to_cell_size(self._asset_loader.sprites["sea_bg"])
-        self._hit_marker_sprite = self.scale_sprite_to_cell_size(self._asset_loader.sprites["red_marker"], True)
-        self._miss_marker_sprite = self.scale_sprite_to_cell_size(self._asset_loader.sprites["miss_marker"], True)
+        self._bg_sprite = self.scale_sprite(self._asset_loader.sprites["sea_bg"])
+        self._hit_marker_sprite = self.scale_sprite(self._asset_loader.sprites["red_marker"], True)
+        self._miss_marker_sprite = self.scale_sprite(self._asset_loader.sprites["miss_marker"], True)
         self._event_relay.subscribe(self, self.update, Event.ON_RENDER)
         self.hit_markers: list[tuple[int, int]] = []
         self.miss_markers: list[tuple[int, int]] = []
@@ -103,9 +113,9 @@ class GameBoardVisual(AbstractRenderable):
     def are_coordinates_within_bounds(self, coordinates: tuple[int, int]):
         return (0 <= coordinates[0] <= self._cells_x and 0 <= coordinates[1] <= self._cells_y)
 
-    def scale_sprite_to_cell_size(self, sprite: pygame.Surface, alpha: bool = False):
+    def scale_sprite(self, sprite: pygame.Surface, alpha: bool = False):
         flags = 0
-        if (alpha):
+        if alpha:
             flags = pygame.SRCALPHA
         surf = pygame.Surface((self._cell_size, self._cell_size), flags)
         pygame.transform.scale(
@@ -150,11 +160,11 @@ class GameBoardVisual(AbstractRenderable):
             (ship.x*self._cell_size, (ship.y + y_mod)*self._cell_size)
         )
 
-    def draw_ship_preview(self, ship_type: str, dir: Direction, pos: tuple[int, int]):
+    def draw_ship_preview(self, ship_type: str, direction: Direction, pos: tuple[int, int]):
         y_mod = 0
-        if dir == Direction.VERTICAL:
+        if direction == Direction.VERTICAL:
             y_mod = (len(SHIP_TYPES[ship_type].get_tiles(Direction.HORIZONTAL))-1) * -1
-        surf = self._asset_loader.ship_sprites[SHIP_TYPES[ship_type].name][dir].copy()
+        surf = self._asset_loader.ship_sprites[SHIP_TYPES[ship_type].name][direction].copy()
         surf.set_alpha(128)
         self._board_surface.blit(
             surf,

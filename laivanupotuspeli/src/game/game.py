@@ -1,9 +1,7 @@
 from game.game_controller import GameController
 from game.player import Player
 from game.ai_player import AIPlayer
-from game.board import Board
 from engine.event_relay import EventRelay
-from game.ship_type import ShipType
 
 class Game:
     def __init__(self):
