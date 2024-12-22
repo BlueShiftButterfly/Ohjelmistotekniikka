@@ -5,17 +5,17 @@
 ```mermaid
  classDiagram
 
-    Player "1" --|> "1" Board
     Board "1" --|> "*" Ship
     Board "1" --|> "*" Guess
     GameController "1" --|> "2" Player
+    GameController "1" --|> "2" Board
     Ship "1" --|> "1" ShipType
 
     class Guess{
         bool hitShip
     }
     class Player{
-        Board board
+        
     }
     class Ship{
         ShipType shipType
@@ -30,6 +30,8 @@
     class GameController {
         Player player1        
         Player player2
+        Board player1_board
+        Board player2_board
     }
     class ShipType{
         List<tuple> shipTilesCoordinates
